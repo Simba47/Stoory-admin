@@ -1,5 +1,5 @@
 import Apply from "..pages/Apply";
-import ".syles.css";
+import ".styles.css";
 
 function App() {
   return <Apply />;
