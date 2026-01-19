@@ -40,16 +40,27 @@ router.get("/export", async (req, res) => {
   const sheet = workbook.addWorksheet("Applications");
 
   sheet.columns = [
-    { header: "Role", key: "role", width: 15 },
-    { header: "Name", key: "name", width: 20 },
-    { header: "DOB", key: "dob", width: 15 },
-    { header: "Mobile", key: "mobile", width: 15 },
-    { header: "Email", key: "email", width: 25 },
-    { header: "Instagram ID", key: "insta_id", width: 25 },
-    { header: "Created At", key: "created_at", width: 25 },
-  ];
+  { header: "ID", key: "id", width: 8 },
+  { header: "Role", key: "role", width: 15 },
+  { header: "Name", key: "name", width: 20 },
+  { header: "DOB", key: "dob", width: 15 },
+  { header: "Instagram ID", key: "insta_id", width: 20 },
+  { header: "Mobile", key: "mobile", width: 15 },
+  { header: "Email", key: "email", width: 30 },
+  { header: "Applied At", key: "created_at", width: 20 }
+];
 
-  sheet.addRows(result.rows);
+sheet.getColumn("dob").numFmt = "yyyy-mm-dd";
+
+rows.forEach(row => {
+  sheet.addRow({
+    ...row,
+    dob: row.dob
+      ? new Date(row.dob).toISOString().split("T")[0]
+      : ""
+  });
+});
+
 
   res.setHeader(
     "Content-Type",
