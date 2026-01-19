@@ -1,19 +1,16 @@
 const mongoose = require("mongoose");
 
-const applicationSchema = new mongoose.Schema({
-  role: {
-    type: String,
-    enum: ["influencer", "business"],
-    required: true
+const mongoose = require("mongoose");
+
+const applicationSchema = new mongoose.Schema(
+  {
+    role: String,
+    name: String,
+    dob: String,
+    mobile: String,
+    email: String
   },
-  name: String,
-  dob: String,
-  mobile: String,
-  email: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Application", applicationSchema);
