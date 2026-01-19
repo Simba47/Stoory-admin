@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 export default function Apply() {
+  const API_URL = "https://stoory-backend.onrender.com";
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -17,14 +19,14 @@ export default function Apply() {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(
-      "https://YOUR-BACKEND.onrender.com/api/applications/apply",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      }
-    );
+   const res = await fetch(`${API_URL}/api/apply`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(form)
+});
+
 
     const data = await res.json();
     alert(data.message);
