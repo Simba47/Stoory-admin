@@ -17,7 +17,7 @@ function App() {
 
   const submitForm = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/apply", {
+      const res = await fetch("https://stoory-backend-e41q.onrender.com/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form)
