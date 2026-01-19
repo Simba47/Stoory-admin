@@ -5,7 +5,9 @@ export default function Apply() {
     name: "",
     email: "",
     mobile: "",
-    role: ""
+    role: "",
+    dob: "",
+    insta_id: ""
   });
 
   const handleChange = (e) => {
@@ -16,7 +18,7 @@ export default function Apply() {
     e.preventDefault();
 
     const res = await fetch(
-      "https://YOUR-BACKEND.onrender.com/api/apply",
+      "https://YOUR-BACKEND.onrender.com/api/applications/apply",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -26,6 +28,16 @@ export default function Apply() {
 
     const data = await res.json();
     alert(data.message);
+
+    // optional: clear form after submit
+    setForm({
+      name: "",
+      email: "",
+      mobile: "",
+      role: "",
+      dob: "",
+      insta_id: ""
+    });
   };
 
   return (
@@ -34,10 +46,56 @@ export default function Apply() {
       <p>Create stories. Build impact.</p>
 
       <form onSubmit={submitForm} className="card">
-        <input name="name" placeholder="Full Name" onChange={handleChange} required />
-        <input name="email" placeholder="Email" onChange={handleChange} required />
-        <input name="mobile" placeholder="Mobile" onChange={handleChange} required />
-        <input name="role" placeholder="Role you want" onChange={handleChange} required />
+        <input
+          name="name"
+          placeholder="Full Name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          name="mobile"
+          placeholder="Mobile Number"
+          value={form.mobile}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          name="role"
+          placeholder="Role you want"
+          value={form.role}
+          onChange={handleChange}
+          required
+        />
+
+        {/* NEW: DOB */}
+        <input
+          name="dob"
+          type="date"
+          value={form.dob}
+          onChange={handleChange}
+          required
+        />
+
+        {/* NEW: Instagram ID */}
+        <input
+          name="insta_id"
+          placeholder="Instagram ID (without @)"
+          value={form.insta_id}
+          onChange={handleChange}
+        />
+
         <button type="submit">Apply Now</button>
       </form>
     </div>
