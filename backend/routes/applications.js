@@ -9,6 +9,9 @@ const ExcelJS = require("exceljs");
 ================================================= */
 router.post("/apply", async (req, res) => {
   try {
+    // Log incoming payload (VERY IMPORTANT for debugging)
+    console.log("📩 APPLY REQUEST BODY:", req.body);
+
     const {
       role,
       name,
@@ -20,12 +23,14 @@ router.post("/apply", async (req, res) => {
       price,
     } = req.body;
 
-    // Common validation
+    // Basic required fields
     if (!role || !name || !mobile || !email) {
-      return res.status(400).json({ message: "Missing required fields" });
+      return res.status(400).json({
+        message: "Missing required fields",
+      });
     }
 
-    // Role-based validation
+    // Role-based validation (safe)
     if (role === "Influencer") {
       if (!insta_id || !location || !price) {
         return res.status(400).json({
@@ -42,44 +47,42 @@ router.post("/apply", async (req, res) => {
       }
     }
 
-    const query = `
-      INSERT INTO applications (
-        role,
-        name,
-        mobile,
-        email,
-        insta_id,
-        company_name,
-        location,
-        price
-      )
+    // BULLETPROOF INSERT
+    await pool.query(
+      `
+      INSERT INTO applications
+      (role, name, mobile, email, insta_id, company_name, location, price)
       VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-    `;
-
-    const values = [
-      role,
-      name,
-      mobile,
-      email,
-      insta_id || null,
-      company_name || null,
-      location,
-      price,
-    ];
-
-    await pool.query(query, values);
+      `,
+      [
+        String(role),
+        String(name),
+        String(mobile),
+        String(email),
+        insta_id ? String(insta_id) : null,
+        company_name ? String(company_name) : null,
+        location ? String(location) : null,
+        price ? String(price) : null, // force TEXT-safe
+      ]
+    );
 
     res.status(200).json({
       message: "Application saved successfully ✅",
     });
   } catch (err) {
-    console.error("❌ Apply error:", err);
-    res.status(500).json({ message: "Server error" });
+    // FULL ERROR LOGGING (Render will show this)
+    console.error("❌ APPLY ERROR FULL:", err);
+    console.error("❌ MESSAGE:", err.message);
+    console.error("❌ STACK:", err.stack);
+
+    res.status(500).json({
+      message: "Server error",
+    });
   }
 });
 
 /* =================================================
-   GET: All applications
+   GET: All applications (Admin / Debug)
    URL: /api/applications
 ================================================= */
 router.get("/", async (req, res) => {
@@ -102,7 +105,7 @@ router.get("/", async (req, res) => {
 
     res.json(result.rows);
   } catch (err) {
-    console.error("❌ Fetch error:", err);
+    console.error("❌ FETCH ERROR:", err);
     res.status(500).json({ message: "Failed to fetch applications" });
   }
 });
@@ -145,7 +148,9 @@ router.get("/export", async (req, res) => {
       { header: "Applied At", key: "created_at", width: 22 },
     ];
 
-    result.rows.forEach(row => sheet.addRow(row));
+    result.rows.forEach((row) => {
+      sheet.addRow(row);
+    });
 
     res.setHeader(
       "Content-Type",
@@ -159,7 +164,7 @@ router.get("/export", async (req, res) => {
     await workbook.xlsx.write(res);
     res.end();
   } catch (err) {
-    console.error("❌ Export error:", err);
+    console.error("❌ EXPORT ERROR:", err);
     res.status(500).json({ message: "Export failed" });
   }
 });
