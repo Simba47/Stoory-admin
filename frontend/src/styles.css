@@ -31,10 +31,12 @@ body {
 }
 
 .logo {
-  font-size: 28px;
+  font-size: 22px;          /* smaller like original */
   font-weight: 800;
   color: #2f6bff;
+  letter-spacing: -0.5px;
 }
+
 
 .menu {
   font-size: 24px;
