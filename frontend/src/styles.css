@@ -232,4 +232,64 @@ body {
   .buttons {
     flex-direction: row;
   }
+  /* =======================
+   STOORY HERO ANIMATION
+======================= */
+
+.hero-image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MAIN IMAGE */
+.hero-main {
+  width: 100%;
+  max-width: 420px;
+  z-index: 2;
+}
+
+/* ORBITS */
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px dashed rgba(47, 107, 255, 0.6);
+  animation: rotate 18s linear infinite;
+}
+
+.orbit-1 {
+  width: 260px;
+  height: 260px;
+}
+
+.orbit-2 {
+  width: 360px;
+  height: 360px;
+  animation-duration: 28s;
+}
+
+/* ROTATION */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* MOBILE TUNING */
+@media (max-width: 600px) {
+  .orbit-1 {
+    width: 220px;
+    height: 220px;
+  }
+
+  .orbit-2 {
+    width: 300px;
+    height: 300px;
+  }
+}
+
 }

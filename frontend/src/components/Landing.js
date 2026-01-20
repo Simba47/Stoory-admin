@@ -7,27 +7,19 @@ export default function Landing({ onInfluencer, onBrand }) {
         <div className="menu">☰</div>
       </header>
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="hero">
         {/* LEFT CONTENT */}
         <div className="hero-text">
-          <div className="trusted-row">
-            <div className="avatars">
-              <img src="/avatars/a1.png" alt="avatar" />
-              <img src="/avatars/a2.png" alt="avatar" />
-              <img src="/avatars/a3.png" alt="avatar" />
-            </div>
-            <p>Trusted by <b>5,000+</b> influencers & brands</p>
-          </div>
-
           <h1>
-            Features Designed <br />
-            for <span>Growth</span>
+            we don't tell stories,
+            <br />
+            we <span>STOORY</span> them.
           </h1>
 
           <p className="subtitle">
-            Our platform provides all the tools and features needed to establish
-            meaningful partnerships between brands and influencers.
+            Transparent. Direct. Empowered. Stoory eliminates middlemen,
+            ensuring 100% transparency in every promotion.
           </p>
 
           <div className="buttons">
@@ -39,13 +31,26 @@ export default function Landing({ onInfluencer, onBrand }) {
               Join as Brand →
             </button>
           </div>
+
+          <div className="trusted-row">
+            <div className="avatars">
+              <img src="/avatars/a1.png" alt="avatar" />
+              <img src="/avatars/a2.png" alt="avatar" />
+              <img src="/avatars/a3.png" alt="avatar" />
+            </div>
+            <p>Trusted by <b>5,000+</b> influencers & brands</p>
+          </div>
         </div>
 
-        {/* RIGHT IMAGE */}
+        {/* RIGHT IMAGE + ANIMATION */}
         <div className="hero-image">
+          <div className="orbit orbit-1"></div>
+          <div className="orbit orbit-2"></div>
+
           <img
             src="/hero/stoory-hero.png"
-            alt="Stoory platform"
+            alt="Stoory Hero"
+            className="hero-main"
           />
         </div>
       </section>
