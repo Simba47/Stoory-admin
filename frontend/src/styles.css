@@ -253,6 +253,106 @@ body {
     height: 26px;
   }
 }
+/* TRUSTED */
+.trusted-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  color: #666;
+  font-size: 14px;
+}
+
+.avatars img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: -8px;
+  border: 2px solid #fff;
+}
+
+/* FEATURES */
+.features {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.features span {
+  color: #2f6bff;
+}
+
+.section-desc {
+  color: #666;
+  margin: 14px 0 30px;
+}
+
+.feature-list {
+  display: grid;
+  gap: 16px;
+}
+
+.feature-card {
+  background: #f8fbff;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: left;
+}
+
+/* HOW */
+.how {
+  padding: 60px 20px;
+  background: #f8fbff;
+}
+
+.how-step {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.how-step span {
+  background: #2f6bff;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+/* MISSION */
+.mission {
+  padding: 60px 20px;
+}
+
+.mission-box {
+  background: #f8fbff;
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 16px;
+}
+
+/* TEAM */
+.team {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.team-card {
+  margin-top: 20px;
+}
+
+.team-card img {
+  width: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
 
 
 }
