@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../utils/db");
 
+/* POST: save application */
 router.post("/apply", async (req, res) => {
   try {
     const { role, name, mobile, email } = req.body;
@@ -19,6 +20,19 @@ router.post("/apply", async (req, res) => {
     res.json({ message: "Application saved successfully" });
   } catch (err) {
     console.error("Apply error:", err.message);
+    res.status(500).json({ message: "Database error" });
+  }
+});
+
+/* ✅ GET: fetch all applications */
+router.get("/", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM applications ORDER BY id DESC"
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Fetch error:", err.message);
     res.status(500).json({ message: "Database error" });
   }
 });
