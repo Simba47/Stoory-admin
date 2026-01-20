@@ -31,11 +31,11 @@ body {
 }
 
 .logo {
-  font-size: 22px;          /* smaller like original */
-  font-weight: 800;
-  color: #2f6bff;
-  letter-spacing: -0.5px;
+  height: 28px;      /* exact mobile size */
+  width: auto;
+  display: block;
 }
+
 
 
 .menu {
@@ -250,8 +250,9 @@ body {
 }
 @media (max-width: 600px) {
   .logo {
-    font-size: 20px;
+    height: 26px;
   }
 }
+
 
 }
