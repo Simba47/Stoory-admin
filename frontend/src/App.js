@@ -15,29 +15,29 @@ function App() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const submitForm = async () => {
-    try {
-      const res = await fetch("https://stoory-backend.onrender.com/api/apply", {
+const submitForm = async () => {
+  try {
+    const res = await fetch("https://stoory-backend-e41q.onrender.com/api/apply", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    });
 
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
+    const data = await res.json();
+    console.log("Response:", data); // 👈 DEBUG LOG
 
-      const data = await res.json();
-      setMsg(data.message || "Submitted");
-
-      setForm({
-        role: "influencer",
-        name: "",
-        dob: "",
-        mobile: "",
-        email: ""
-      });
-    } catch (err) {
-      setMsg("Backend not running ❌");
+    if (res.ok) {
+      setMsg(data.message);
+    } else {
+      setMsg("Server error ❌");
     }
-  };
+  } catch (err) {
+    console.error("Fetch error:", err);
+    setMsg("Network error ❌");
+  }
+};
 
   return (
     <div style={{ maxWidth: 400, margin: "50px auto" }}>
