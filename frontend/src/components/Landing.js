@@ -1,146 +1,152 @@
+import React, { useState } from "react";
+
 export default function Landing({ onInfluencer, onBrand }) {
+  const [active, setActive] = useState("brand");
+
   return (
     <div className="landing">
-
       {/* HEADER */}
       <header className="header">
-        <img src="/logo.png" alt="Stoory" className="logo" />
+        <img
+          src="/logo.png"
+          alt="stoory"
+          className="logo-img"
+        />
         <div className="menu">☰</div>
       </header>
 
-      {/* HERO */}
+      {/* HERO SECTION */}
       <section className="hero">
-        <h1>
-          we don't tell stories,
-          <br />
-          we <span>STOORY</span> them.
-        </h1>
+        <div className="hero-text">
+          <h1>
+            we don't tell stories,
+            <br />
+            we <span>STOORY</span> them.
+          </h1>
 
-        <p className="subtitle">
-          Transparent. Direct. Empowered. Stoory eliminates middlemen,
-          ensuring 100% transparency in every promotion.
-        </p>
+          <p className="subtitle">
+            Transparent. Direct. Empowered. Stoory eliminates middlemen,
+            ensuring 100% transparency in every promotion.
+          </p>
 
-        <button className="primary" onClick={onInfluencer}>
-          Join as Influencer →
-        </button>
+          <div className="buttons">
+            <button className="primary" onClick={onInfluencer}>
+              Join as Influencer →
+            </button>
 
-        <button className="secondary" onClick={onBrand}>
-          Join as Brand →
-        </button>
-
-        <div className="trusted-row">
-          <div className="avatars">
-            <img src="/avatars/a1.png" alt="" />
-            <img src="/avatars/a2.png" alt="" />
-            <img src="/avatars/a3.png" alt="" />
+            <button className="secondary" onClick={onBrand}>
+              Join as Brand →
+            </button>
           </div>
-          <p>Trusted by <b>5,000+</b> influencers & brands</p>
+
+          <div className="trusted">
+            <div className="avatars">
+              <img src="/avatars/a1.png" alt="" />
+              <img src="/avatars/a2.png" alt="" />
+              <img src="/avatars/a3.png" alt="" />
+            </div>
+            <span>Trusted by 5,000+ influencers & brands</span>
+          </div>
         </div>
 
+        {/* HERO IMAGE */}
         <div className="hero-image">
           <img src="/hero/stoory-hero.png" alt="Stoory Hero" />
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="features">
+      {/* HOW STOORY WORKS */}
+      <section className="how">
         <h2>
-          Features Designed <br />
-          for <span>Growth</span>
+          How <span>Stoory</span> Works
         </h2>
 
-        <p className="section-desc">
-          Our platform provides all the tools and features needed to establish
-          meaningful partnerships between brands and influencers.
+        <p className="how-desc">
+          Our streamlined process makes collaboration simple, transparent,
+          and effective for both influencers and brands.
         </p>
 
-        <div className="feature-list">
-          <div className="feature-card">
-            <h4>100% Transparency</h4>
-            <p>Clear pricing and direct communication.</p>
+        {/* TOGGLE */}
+        <div className="how-toggle">
+          <button
+            className={active === "influencer" ? "active" : ""}
+            onClick={() => setActive("influencer")}
+          >
+            For Influencers
+          </button>
+          <button
+            className={active === "brand" ? "active" : ""}
+            onClick={() => setActive("brand")}
+          >
+            For Brands
+          </button>
+        </div>
+
+        {/* INFLUENCER FLOW */}
+        {active === "influencer" && (
+          <div className="how-steps">
+            <div className="how-card">
+              <div className="step">1</div>
+              <h4>Create Your Profile</h4>
+              <p>
+                Showcase your content, audience demographics, engagement
+                rates, and previous collaborations.
+              </p>
+            </div>
+
+            <div className="how-card">
+              <div className="step">2</div>
+              <h4>Connect With Brands</h4>
+              <p>
+                Browse brand opportunities or receive direct collaboration
+                requests that match your niche.
+              </p>
+            </div>
+
+            <div className="how-card">
+              <div className="step">3</div>
+              <h4>Collaborate & Earn</h4>
+              <p>
+                Accept offers, deliver content, and receive secure payments
+                without any middleman fees.
+              </p>
+            </div>
           </div>
+        )}
 
-          <div className="feature-card">
-            <h4>Direct Collaboration</h4>
-            <p>No agencies. No middlemen.</p>
+        {/* BRAND FLOW */}
+        {active === "brand" && (
+          <div className="how-steps">
+            <div className="how-card">
+              <div className="step">1</div>
+              <h4>Set Up Your Brand</h4>
+              <p>
+                Create your brand profile, showcase products, and define
+                campaign goals.
+              </p>
+            </div>
+
+            <div className="how-card">
+              <div className="step">2</div>
+              <h4>Find Perfect Influencers</h4>
+              <p>
+                Search and filter influencers by niche, audience demographics,
+                and engagement rates.
+              </p>
+            </div>
+
+            <div className="how-card">
+              <div className="step">3</div>
+              <h4>Launch & Track Campaigns</h4>
+              <p>
+                Create campaigns, set deliverables, and monitor real-time
+                performance metrics.
+              </p>
+            </div>
           </div>
-
-          <div className="feature-card">
-            <h4>Secure Payments</h4>
-            <p>Safe and timely payouts.</p>
-          </div>
-
-          <div className="feature-card">
-            <h4>Real-Time Tracking</h4>
-            <p>Track performance instantly.</p>
-          </div>
-        </div>
+        )}
       </section>
-
-      {/* HOW IT WORKS */}
-      <section className="how">
-        <h2>How Stoory Works</h2>
-
-        <div className="how-step">
-          <span>1</span>
-          <p>Create your profile</p>
-        </div>
-
-        <div className="how-step">
-          <span>2</span>
-          <p>Connect with brands or influencers</p>
-        </div>
-
-        <div className="how-step">
-          <span>3</span>
-          <p>Launch campaigns & grow</p>
-        </div>
-      </section>
-
-      {/* MISSION */}
-      <section className="mission">
-        <h2>Our Mission & Vision</h2>
-
-        <div className="mission-box">
-          <h4>Mission</h4>
-          <p>
-            To create a transparent ecosystem where creators and brands grow
-            together without intermediaries.
-          </p>
-        </div>
-
-        <div className="mission-box">
-          <h4>Vision</h4>
-          <p>
-            To become the most trusted influencer-brand collaboration platform.
-          </p>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section className="team">
-        <h2>Meet Our Team</h2>
-
-        <div className="team-card">
-          <img src="/avatars/a1.png" alt="" />
-          <h4>Praneeth Konda</h4>
-          <p>Founder</p>
-        </div>
-
-        <div className="team-card">
-          <img src="/avatars/a2.png" alt="" />
-          <h4>Shreya Mishra</h4>
-          <p>Marketing Lead</p>
-        </div>
-
-        <div className="team-card">
-          <img src="/avatars/a3.png" alt="" />
-          <h4>Rohit Kumar</h4>
-          <p>Tech Lead</p>
-        </div>
-      </section>
-
     </div>
   );
 }
+
