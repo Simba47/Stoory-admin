@@ -8,6 +8,9 @@ export default function Apply() {
     name: "",
     mobile: "",
     email: "",
+    insta_id: "",
+    location: "",
+    company_name: "",
   });
 
   const [status, setStatus] = useState("");
@@ -36,6 +39,9 @@ export default function Apply() {
         name: "",
         mobile: "",
         email: "",
+        insta_id: "",
+        location: "",
+        company_name: "",
       });
     } catch (err) {
       setStatus("❌ Backend rejected request");
@@ -44,44 +50,31 @@ export default function Apply() {
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Stoory Application</h1>
+      <h2>Stoory Application</h2>
 
       <form onSubmit={submitForm}>
         <select name="role" value={form.role} onChange={handleChange}>
-          <option value="Influencer">Influencer</option>
-          <option value="Business">Business</option>
-        </select>
-        <br /><br />
+          <option>Influencer</option>
+          <option>Business</option>
+        </select><br /><br />
 
-        <input
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <br /><br />
+        <input name="name" placeholder="Full Name" onChange={handleChange} required /><br /><br />
+        <input name="mobile" placeholder="Mobile" onChange={handleChange} required /><br /><br />
+        <input type="email" name="email" placeholder="Email" onChange={handleChange} required /><br /><br />
 
-        <input
-          name="mobile"
-          placeholder="Mobile Number"
-          value={form.mobile}
-          onChange={handleChange}
-          inputMode="numeric"
-          pattern="[0-9]{10}"
-          required
-        />
-        <br /><br />
+        <input name="insta_id" placeholder="Instagram ID" onChange={handleChange} /><br /><br />
+        <input name="location" placeholder="Location" onChange={handleChange} /><br /><br />
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <br /><br />
+        {form.role === "Business" && (
+          <>
+            <input
+              name="company_name"
+              placeholder="Company Name"
+              onChange={handleChange}
+            />
+            <br /><br />
+          </>
+        )}
 
         <button type="submit">Submit</button>
       </form>
