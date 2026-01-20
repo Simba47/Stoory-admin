@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 
 export default function Apply() {
-  const API_URL = "https://e41q.onrender.com";
+  const API_URL = "https://stoory-backend.onrender.com";
 
   const [form, setForm] = useState({
-    role: "",
+    role: "Influencer",
     name: "",
     dob: "",
-    insta_id: "",
     mobile: "",
-    email: ""
+    email: "",
+    insta_id: ""
   });
 
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
   };
 
   const submitForm = async (e) => {
@@ -25,51 +28,38 @@ export default function Apply() {
     try {
       const res = await fetch(`${API_URL}/api/applications/apply`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
       });
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.message || "Failed");
+      if (!res.ok) {
+        throw new Error(data.message || "Submission failed");
+      }
 
-      setStatus("Application submitted ✅");
+      setStatus("✅ Application submitted successfully");
       setForm({
-        role: "",
+        role: "Influencer",
         name: "",
         dob: "",
-        insta_id: "",
         mobile: "",
-        email: ""
+        email: "",
+        insta_id: ""
       });
     } catch (err) {
-      console.error(err);
-      setStatus("Network error ❌");
+      setStatus("❌ " + err.message);
     }
   };
 
   return (
-    <form onSubmit={submitForm}>
+    <div style={{ maxWidth: 400, margin: "40px auto", fontFamily: "Arial" }}>
       <h2>Stoory Application</h2>
 
-      <select name="role" value={form.role} onChange={handleChange} required>
-        <option value="">Select Role</option>
-        <option value="Influencer">Influencer</option>
-        <option value="Business">Business</option>
-      </select>
-
-      <input name="name" value={form.name} onChange={handleChange} placeholder="Name" required />
-      <input type="date" name="dob" value={form.dob} onChange={handleChange} required />
-      <input name="insta_id" value={form.insta_id} onChange={handleChange} placeholder="Instagram ID" />
-      <input name="mobile" value={form.mobile} onChange={handleChange} placeholder="Mobile" required />
-      <input name="email" value={form.email} onChange={handleChange} placeholder="Email" required />
-
-      <button type="submit">Submit</button>
-      <p>{status}</p>
-    </form>
-  );
-    }
-          <option value="">Select Role</option>
+      <form onSubmit={submitForm}>
+        <select name="role" value={form.role} onChange={handleChange}>
           <option value="Influencer">Influencer</option>
           <option value="Business">Business</option>
         </select>
@@ -77,9 +67,8 @@ export default function Apply() {
         <br /><br />
 
         <input
-          type="text"
           name="name"
-          placeholder="Full Name"
+          placeholder="Name"
           value={form.name}
           onChange={handleChange}
           required
@@ -98,20 +87,8 @@ export default function Apply() {
         <br /><br />
 
         <input
-          type="text"
-          name="insta_id"
-          placeholder="Instagram ID (username only)"
-          value={form.insta_id}
-          onChange={handleChange}
-          required
-        />
-
-        <br /><br />
-
-        <input
-          type="text"
           name="mobile"
-          placeholder="Mobile Number"
+          placeholder="Mobile"
           value={form.mobile}
           onChange={handleChange}
           required
@@ -122,7 +99,7 @@ export default function Apply() {
         <input
           type="email"
           name="email"
-          placeholder="Email Address"
+          placeholder="Email"
           value={form.email}
           onChange={handleChange}
           required
@@ -130,18 +107,19 @@ export default function Apply() {
 
         <br /><br />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Submitting..." : "Submit Application"}
-        </button>
+        <input
+          name="insta_id"
+          placeholder="Instagram ID"
+          value={form.insta_id}
+          onChange={handleChange}
+        />
+
+        <br /><br />
+
+        <button type="submit">Submit</button>
       </form>
 
-      {message && (
-        <p style={{ marginTop: "20px", fontWeight: "bold" }}>
-          {message}
-        </p>
-      )}
+      <p>{status}</p>
     </div>
   );
-}
-
-export default Apply;
+};
