@@ -1,33 +1,49 @@
+import React from "react";
+import "../styles.css";
+import heroImage from "../assets/hero.png";
+
 export default function Landing({ onInfluencer, onBrand }) {
   return (
     <div className="landing">
+      {/* HEADER */}
       <header className="header">
         <h2 className="logo">stoory</h2>
         <div className="menu">☰</div>
       </header>
 
-      <div className="hero">
-        <h1>
-          we don't tell stories,
-          <br />
-          we <span>STOORY</span> them.
-        </h1>
+      {/* HERO SECTION */}
+      <section className="hero">
+        <div className="hero-text">
+          <p className="trusted">
+            Trusted by <b>5,000+</b> influencers & brands
+          </p>
 
-        <p>
-          Transparent. Direct. Empowered. Stoory eliminates middlemen,
-          ensuring 100% transparency in every promotion.
-        </p>
+          <h1>
+            Features Designed <br />
+            for <span>Growth</span>
+          </h1>
 
-        <button className="primary" onClick={onInfluencer}>
-          Join as Influencer →
-        </button>
+          <p className="subtitle">
+            Our platform provides all the tools and features needed to establish
+            meaningful partnerships between brands and influencers.
+          </p>
 
-        <button className="secondary" onClick={onBrand}>
-          Join as Brand →
-        </button>
+          <div className="buttons">
+            <button className="primary" onClick={onInfluencer}>
+              Join as Influencer →
+            </button>
 
-        <p className="trusted">Trusted by 5,000+ influencers & brands</p>
-      </div>
+            <button className="secondary" onClick={onBrand}>
+              Join as Brand →
+            </button>
+          </div>
+        </div>
+
+        {/* IMAGE */}
+        <div className="hero-image">
+          <img src={heroImage} alt="Stoory platform" />
+        </div>
+      </section>
     </div>
   );
 }

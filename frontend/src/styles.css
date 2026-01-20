@@ -112,67 +112,137 @@ body {
   margin-top: 12px;
   font-size: 14px;
 }
-/* ============================
-   STOORY UI POLISH (APPEND)
-   ============================ */
-
-.modal {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-  padding: 26px 22px 30px;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
-.modal h2 {
-  font-size: 22px;
-  font-weight: 600;
+/* LANDING */
+.landing {
+  min-height: 100vh;
+  background: #ffffff;
 }
 
-.modal input {
-  padding: 14px 16px;
-  font-size: 14px;
-  border-radius: 12px;
-  background: #f9fbff;
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
 }
 
-.modal input:focus {
-  outline: none;
-  border-color: #3b6cff;
-  background: #fff;
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: #2f6bff;
 }
 
-.primary.full {
-  margin-top: 16px;
-  padding: 14px;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.close {
-  font-size: 22px;
-  color: #666;
+.menu {
+  font-size: 24px;
   cursor: pointer;
 }
 
-.modal-overlay {
-  backdrop-filter: blur(6px);
+/* HERO */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
 }
 
-/* Role buttons polish */
-.primary:hover {
-  opacity: 0.95;
+/* TEXT */
+.hero-text {
+  max-width: 520px;
 }
 
-.secondary:hover {
-  background: #f3f6ff;
+.trusted {
+  color: #777;
+  margin-bottom: 14px;
 }
 
-/* Mobile perfection */
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 28px;
+.hero-text h1 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.hero-text h1 span {
+  color: #2f6bff;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.primary {
+  background: #2f6bff;
+  color: #fff;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary {
+  background: transparent;
+  color: #2f6bff;
+  border: 2px solid #2f6bff;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* IMAGE */
+.hero-image {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+}
+
+/* DESKTOP VIEW */
+@media (min-width: 900px) {
+  .hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    padding: 60px 80px;
   }
 
-  .modal {
-    border-radius: 20px;
+  .hero-text {
+    max-width: 480px;
+  }
+
+  .hero-image {
+    max-width: 520px;
+    margin-top: 0;
+  }
+
+  .buttons {
+    flex-direction: row;
   }
 }
