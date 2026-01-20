@@ -6,7 +6,6 @@ export default function Apply() {
   const [form, setForm] = useState({
     role: "Influencer",
     name: "",
-    dob: "",
     mobile: "",
     email: "",
     insta_id: "",
@@ -15,10 +14,7 @@ export default function Apply() {
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const submitForm = async (e) => {
@@ -28,88 +24,49 @@ export default function Apply() {
     try {
       const res = await fetch(`${API_URL}/api/applications/apply`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
-      if (!res.ok) {
-        throw new Error("Server error");
-      }
-
       const data = await res.json();
-      setStatus("✅ Application submitted successfully");
 
-      // reset form
+      if (!res.ok) throw new Error(data.message);
+
+      setStatus("✅ Application submitted successfully");
       setForm({
         role: "Influencer",
         name: "",
-        dob: "",
         mobile: "",
         email: "",
         insta_id: "",
       });
     } catch (err) {
       console.error(err);
-      setStatus("❌ Failed to submit (backend error)");
+      setStatus("❌ Backend rejected request");
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: 20 }}>
       <h1>Stoory Application</h1>
 
       <form onSubmit={submitForm}>
         <select name="role" value={form.role} onChange={handleChange}>
-          <option value="Influencer">Influencer</option>
-          <option value="Business">Business</option>
+          <option>Influencer</option>
+          <option>Business</option>
         </select>
         <br /><br />
 
-        <input
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
+        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
         <br /><br />
 
-        <input
-          type="date"
-          name="dob"
-          value={form.dob}
-          onChange={handleChange}
-          required
-        />
+        <input name="mobile" placeholder="Mobile" value={form.mobile} onChange={handleChange} required />
         <br /><br />
 
-        <input
-          name="mobile"
-          placeholder="Mobile"
-          value={form.mobile}
-          onChange={handleChange}
-          required
-        />
+        <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
         <br /><br />
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <br /><br />
-
-        <input
-          name="insta_id"
-          placeholder="Instagram ID"
-          value={form.insta_id}
-          onChange={handleChange}
-        />
+        <input name="insta_id" placeholder="Instagram ID" value={form.insta_id} onChange={handleChange} />
         <br /><br />
 
         <button type="submit">Submit</button>
@@ -118,4 +75,4 @@ export default function Apply() {
       <p>{status}</p>
     </div>
   );
-}
+                                                                 }
