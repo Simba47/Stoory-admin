@@ -248,5 +248,10 @@ body {
     height: 300px;
   }
 }
+@media (max-width: 600px) {
+  .logo {
+    font-size: 20px;
+  }
+}
 
 }
