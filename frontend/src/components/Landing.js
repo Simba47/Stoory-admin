@@ -4,9 +4,9 @@ export default function Landing({ onInfluencer, onBrand }) {
       {/* HEADER */}
       <header className="header">
   <img
-    src="/logo/stoory-logo.png"
+    src="/logo.png"
     alt="Stoory"
-    className="logo-img"
+    className="logo"
   />
   <div className="menu">☰</div>
 </header>
