@@ -7,7 +7,7 @@ export default function BrandModal({ onClose }) {
     name: "",
     mobile: "",
     email: "",
-    company: "",
+    company_name: "",
     location: "",
     price: ""
   });
@@ -52,7 +52,7 @@ export default function BrandModal({ onClose }) {
         <input name="name" placeholder="Full Name" onChange={handleChange} />
         <input name="mobile" placeholder="Mobile Number" onChange={handleChange} />
         <input name="email" placeholder="Email Address" onChange={handleChange} />
-        <input name="company" placeholder="Company Name" onChange={handleChange} />
+        <input name="company_name" placeholder="Company Name" onChange={handleChange} />
         <input name="location" placeholder="Location" onChange={handleChange} />
         <input name="price" placeholder="Price for Promotion" onChange={handleChange} />
 
