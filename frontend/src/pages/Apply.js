@@ -21,14 +21,14 @@ export default function Apply() {
     setStatus("Submitting...");
 
     try {
-      const res = await fetch(`${API_URL}/api/applications`, {
+      const res = await fetch(`${API_URL}/api/applications/apply`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Request failed");
+      if (!res.ok) throw new Error(data.message);
 
       setStatus("✅ Application submitted successfully");
       setForm({
@@ -38,7 +38,6 @@ export default function Apply() {
         email: "",
       });
     } catch (err) {
-      console.error(err);
       setStatus("❌ Backend rejected request");
     }
   };
