@@ -4,13 +4,14 @@ const API_URL = "https://stoory-backend-e41q.onrender.com";
 
 export default function Apply() {
   const [form, setForm] = useState({
-    role: "Influencer",
+    role: "brand",
     name: "",
     mobile: "",
     email: "",
     insta_id: "",
-    location: "",
     company_name: "",
+    location: "",
+    price: "",
   });
 
   const [status, setStatus] = useState("");
@@ -34,47 +35,74 @@ export default function Apply() {
       if (!res.ok) throw new Error(data.message);
 
       setStatus("✅ Application submitted successfully");
+
       setForm({
-        role: "Influencer",
+        role: "brand",
         name: "",
         mobile: "",
         email: "",
         insta_id: "",
-        location: "",
         company_name: "",
+        location: "",
+        price: "",
       });
     } catch (err) {
-      setStatus("❌ Backend rejected request");
+      console.error(err);
+      setStatus("❌ Server error");
     }
   };
 
   return (
     <div style={{ padding: 20 }}>
-      <h2>Stoory Application</h2>
+      <h1>Join as {form.role === "brand" ? "Brand" : "Influencer"}</h1>
 
       <form onSubmit={submitForm}>
         <select name="role" value={form.role} onChange={handleChange}>
-          <option>Influencer</option>
-          <option>Business</option>
-        </select><br /><br />
+          <option value="influencer">Influencer</option>
+          <option value="brand">Brand</option>
+        </select>
+        <br /><br />
 
-        <input name="name" placeholder="Full Name" onChange={handleChange} required /><br /><br />
-        <input name="mobile" placeholder="Mobile" onChange={handleChange} required /><br /><br />
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} required /><br /><br />
+        <input name="name" placeholder="Full Name"
+          value={form.name} onChange={handleChange} required />
+        <br /><br />
 
-        <input name="insta_id" placeholder="Instagram ID" onChange={handleChange} /><br /><br />
-        <input name="location" placeholder="Location" onChange={handleChange} /><br /><br />
+        <input name="mobile" placeholder="Mobile"
+          value={form.mobile} onChange={handleChange} required />
+        <br /><br />
 
-        {form.role === "Business" && (
+        <input type="email" name="email" placeholder="Email"
+          value={form.email} onChange={handleChange} required />
+        <br /><br />
+
+        {form.role === "influencer" && (
+          <>
+            <input name="insta_id" placeholder="Instagram ID"
+              value={form.insta_id} onChange={handleChange} />
+            <br /><br />
+          </>
+        )}
+
+        {form.role === "brand" && (
           <>
             <input
               name="company_name"
               placeholder="Company Name"
+              value={form.company_name}
               onChange={handleChange}
+              required
             />
             <br /><br />
           </>
         )}
+
+        <input name="location" placeholder="Location"
+          value={form.location} onChange={handleChange} required />
+        <br /><br />
+
+        <input name="price" placeholder="Price"
+          value={form.price} onChange={handleChange} required />
+        <br /><br />
 
         <button type="submit">Submit</button>
       </form>
