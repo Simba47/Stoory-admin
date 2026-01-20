@@ -21,15 +21,14 @@ export default function Apply() {
     setStatus("Submitting...");
 
     try {
-      const res = await fetch(`${API_URL}/api/applications/apply`, {
+      const res = await fetch(`${API_URL}/api/applications`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
 
       const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message);
+      if (!res.ok) throw new Error(data.message || "Request failed");
 
       setStatus("✅ Application submitted successfully");
       setForm({
@@ -50,14 +49,14 @@ export default function Apply() {
 
       <form onSubmit={submitForm}>
         <select name="role" value={form.role} onChange={handleChange}>
-          <option>Influencer</option>
-          <option>Business</option>
+          <option value="Influencer">Influencer</option>
+          <option value="Business">Business</option>
         </select>
         <br /><br />
 
         <input
           name="name"
-          placeholder="Name"
+          placeholder="Full Name"
           value={form.name}
           onChange={handleChange}
           required
@@ -66,9 +65,11 @@ export default function Apply() {
 
         <input
           name="mobile"
-          placeholder="Mobile"
+          placeholder="Mobile Number"
           value={form.mobile}
           onChange={handleChange}
+          inputMode="numeric"
+          pattern="[0-9]{10}"
           required
         />
         <br /><br />
@@ -76,7 +77,7 @@ export default function Apply() {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Email Address"
           value={form.email}
           onChange={handleChange}
           required
@@ -89,4 +90,4 @@ export default function Apply() {
       <p>{status}</p>
     </div>
   );
-            }
+}
