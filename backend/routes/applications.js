@@ -1,149 +1,107 @@
-import React, { useState } from "react";
+const express = require("express");
+const router = express.Router();
+const pool = require("../db"); // postgres connection
+const ExcelJS = require("exceljs");
 
-const API_URL = "https://stoory-backend-e41q.onrender.com";
+/**
+ * POST /api/applications/apply
+ */
+router.post("/apply", async (req, res) => {
+  try {
+    const {
+      role,
+      name,
+      mobile,
+      email,
+      insta_id,
+      company_name,
+      location,
+      price,
+    } = req.body;
 
-export default function Apply() {
-  const [form, setForm] = useState({
-    role: "brand",
-    name: "",
-    mobile: "",
-    email: "",
-    insta_id: "",
-    company_name: "",
-    location: "",
-    price: "",
-  });
+    const result = await pool.query(
+      `
+      INSERT INTO applications
+      (role, name, mobile, email, insta_id, company_name, location, price)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      RETURNING *
+      `,
+      [
+        role,
+        name,
+        mobile,
+        email,
+        insta_id || null,
+        company_name || null,
+        location,
+        price,
+      ]
+    );
 
-  const [status, setStatus] = useState("");
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("Apply error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+/**
+ * GET /api/applications
+ */
+router.get("/", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM applications ORDER BY created_at DESC"
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
-  const submitForm = async (e) => {
-    e.preventDefault();
-    setStatus("Submitting...");
+/**
+ * GET /api/applications/export
+ */
+router.get("/export", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM applications ORDER BY created_at DESC"
+    );
 
-    try {
-      const res = await fetch(`${API_URL}/api/applications/apply`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet("Applications");
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
+    sheet.columns = [
+      { header: "ID", key: "id", width: 5 },
+      { header: "Role", key: "role", width: 12 },
+      { header: "Name", key: "name", width: 20 },
+      { header: "Mobile", key: "mobile", width: 15 },
+      { header: "Email", key: "email", width: 25 },
+      { header: "Instagram ID", key: "insta_id", width: 20 },
+      { header: "Company Name", key: "company_name", width: 20 },
+      { header: "Location", key: "location", width: 20 },
+      { header: "Price", key: "price", width: 10 },
+      { header: "Created At", key: "created_at", width: 20 },
+    ];
 
-      setStatus("✅ Application submitted successfully");
-      setForm({
-        role: form.role,
-        name: "",
-        mobile: "",
-        email: "",
-        insta_id: "",
-        company_name: "",
-        location: "",
-        price: "",
-      });
-    } catch (err) {
-      console.error(err);
-      setStatus("❌ Server error");
-    }
-  };
+    result.rows.forEach((row) => sheet.addRow(row));
 
-  return (
-    <div style={{ padding: 20 }}>
-      <h1>
-        Join as {form.role === "brand" ? "Brand" : "Influencer"}
-      </h1>
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      "attachment; filename=applications.xlsx"
+    );
 
-      <form onSubmit={submitForm}>
-        {/* Role select */}
-        <select
-          name="role"
-          value={form.role}
-          onChange={(e) =>
-            setForm({ ...form, role: e.target.value })
-          }
-        >
-          <option value="influencer">Influencer</option>
-          <option value="brand">Brand</option>
-        </select>
-        <br /><br />
+    await workbook.xlsx.write(res);
+    res.end();
+  } catch (err) {
+    console.error("Export error:", err);
+    res.status(500).json({ message: "Export failed" });
+  }
+});
 
-        {/* Common fields */}
-        <input
-          name="name"
-          placeholder="Full Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        /><br /><br />
-
-        <input
-          name="mobile"
-          placeholder="Mobile Number"
-          value={form.mobile}
-          onChange={handleChange}
-          required
-        /><br /><br />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={form.email}
-          onChange={handleChange}
-          required
-        /><br /><br />
-
-        {/* Influencer-specific */}
-        {form.role === "influencer" && (
-          <>
-            <input
-              name="insta_id"
-              placeholder="Instagram ID"
-              value={form.insta_id}
-              onChange={handleChange}
-              required
-            /><br /><br />
-          </>
-        )}
-
-        {/* Brand-specific */}
-        {form.role === "brand" && (
-          <>
-            <input
-              name="company_name"
-              placeholder="Company Name"
-              value={form.company_name}
-              onChange={handleChange}
-              required
-            /><br /><br />
-          </>
-        )}
-
-        {/* Common extra fields */}
-        <input
-          name="location"
-          placeholder="Location"
-          value={form.location}
-          onChange={handleChange}
-          required
-        /><br /><br />
-
-        <input
-          name="price"
-          placeholder="Price"
-          value={form.price}
-          onChange={handleChange}
-          required
-        /><br /><br />
-
-        <button type="submit">Submit</button>
-      </form>
-
-      <p>{status}</p>
-    </div>
-  );
-}
+module.exports = router;
