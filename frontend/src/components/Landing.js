@@ -1,7 +1,3 @@
-import React from "react";
-import "../styles.css";
-import heroImage from "../assets/hero.png";
-
 export default function Landing({ onInfluencer, onBrand }) {
   return (
     <div className="landing">
@@ -13,10 +9,16 @@ export default function Landing({ onInfluencer, onBrand }) {
 
       {/* HERO SECTION */}
       <section className="hero">
+        {/* LEFT CONTENT */}
         <div className="hero-text">
-          <p className="trusted">
-            Trusted by <b>5,000+</b> influencers & brands
-          </p>
+          <div className="trusted-row">
+            <div className="avatars">
+              <img src="/avatars/a1.png" alt="avatar" />
+              <img src="/avatars/a2.png" alt="avatar" />
+              <img src="/avatars/a3.png" alt="avatar" />
+            </div>
+            <p>Trusted by <b>5,000+</b> influencers & brands</p>
+          </div>
 
           <h1>
             Features Designed <br />
@@ -39,9 +41,12 @@ export default function Landing({ onInfluencer, onBrand }) {
           </div>
         </div>
 
-        {/* IMAGE */}
+        {/* RIGHT IMAGE */}
         <div className="hero-image">
-          <img src={heroImage} alt="Stoory platform" />
+          <img
+            src="/hero/stoory-hero.png"
+            alt="Stoory platform"
+          />
         </div>
       </section>
     </div>
