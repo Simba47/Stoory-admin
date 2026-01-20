@@ -1,9 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const API_URL = "https://stoory-backend.onrender.com"; 
-// ⚠️ Make sure this is your REAL Render backend URL
+export default function Apply() {
+  const API_URL = "https://e41q.onrender.com";
 
-function Apply() {
   const [form, setForm] = useState({
     role: "",
     name: "",
@@ -13,43 +12,28 @@ function Apply() {
     email: ""
   });
 
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
 
-  // handle input change
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // submit form
-  const handleSubmit = async (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setMessage("");
+    setStatus("Submitting...");
 
     try {
       const res = await fetch(`${API_URL}/api/applications/apply`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(form)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
       });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        setMessage("❌ Submission failed");
-        setLoading(false);
-        return;
-      }
+      if (!res.ok) throw new Error(data.message || "Failed");
 
-      setMessage("✅ Application submitted successfully");
-
-      // reset form
+      setStatus("Application submitted ✅");
       setForm({
         role: "",
         name: "",
@@ -58,26 +42,33 @@ function Apply() {
         mobile: "",
         email: ""
       });
-
     } catch (err) {
       console.error(err);
-      setMessage("❌ Backend not reachable");
-    } finally {
-      setLoading(false);
+      setStatus("Network error ❌");
     }
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "40px auto" }}>
-      <h2>Stoory – Application Form</h2>
+    <form onSubmit={submitForm}>
+      <h2>Stoory Application</h2>
 
-      <form onSubmit={handleSubmit}>
-        <select
-          name="role"
-          value={form.role}
-          onChange={handleChange}
-          required
-        >
+      <select name="role" value={form.role} onChange={handleChange} required>
+        <option value="">Select Role</option>
+        <option value="Influencer">Influencer</option>
+        <option value="Business">Business</option>
+      </select>
+
+      <input name="name" value={form.name} onChange={handleChange} placeholder="Name" required />
+      <input type="date" name="dob" value={form.dob} onChange={handleChange} required />
+      <input name="insta_id" value={form.insta_id} onChange={handleChange} placeholder="Instagram ID" />
+      <input name="mobile" value={form.mobile} onChange={handleChange} placeholder="Mobile" required />
+      <input name="email" value={form.email} onChange={handleChange} placeholder="Email" required />
+
+      <button type="submit">Submit</button>
+      <p>{status}</p>
+    </form>
+  );
+    }
           <option value="">Select Role</option>
           <option value="Influencer">Influencer</option>
           <option value="Business">Business</option>
