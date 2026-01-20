@@ -1,12 +1,7 @@
-import React from "react";
 import Apply from "./pages/Apply";
 
 function App() {
-  return (
-    <div>
-      <Apply />
-    </div>
-  );
+  return <Apply />;
 }
 
 export default App;
