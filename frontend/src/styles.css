@@ -112,3 +112,67 @@ body {
   margin-top: 12px;
   font-size: 14px;
 }
+/* ============================
+   STOORY UI POLISH (APPEND)
+   ============================ */
+
+.modal {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  padding: 26px 22px 30px;
+}
+
+.modal h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.modal input {
+  padding: 14px 16px;
+  font-size: 14px;
+  border-radius: 12px;
+  background: #f9fbff;
+}
+
+.modal input:focus {
+  outline: none;
+  border-color: #3b6cff;
+  background: #fff;
+}
+
+.primary.full {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.close {
+  font-size: 22px;
+  color: #666;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  backdrop-filter: blur(6px);
+}
+
+/* Role buttons polish */
+.primary:hover {
+  opacity: 0.95;
+}
+
+.secondary:hover {
+  background: #f3f6ff;
+}
+
+/* Mobile perfection */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .modal {
+    border-radius: 20px;
+  }
+}
