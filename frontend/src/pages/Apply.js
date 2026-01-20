@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-export default function Apply() {
-  const API_URL = "https://stoory-backend.onrender.com";
+const API_URL = "https://stoory-backend-e41q.onrender.com";
 
+export default function Apply() {
   const [form, setForm] = useState({
     role: "Influencer",
     name: "",
     dob: "",
     mobile: "",
     email: "",
-    insta_id: ""
+    insta_id: "",
   });
 
   const [status, setStatus] = useState("");
@@ -17,7 +17,7 @@ export default function Apply() {
   const handleChange = (e) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -29,41 +29,42 @@ export default function Apply() {
       const res = await fetch(`${API_URL}/api/applications/apply`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        throw new Error(data.message || "Submission failed");
+        throw new Error("Server error");
       }
 
+      const data = await res.json();
       setStatus("✅ Application submitted successfully");
+
+      // reset form
       setForm({
         role: "Influencer",
         name: "",
         dob: "",
         mobile: "",
         email: "",
-        insta_id: ""
+        insta_id: "",
       });
     } catch (err) {
-      setStatus("❌ " + err.message);
+      console.error(err);
+      setStatus("❌ Failed to submit (backend error)");
     }
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "40px auto", fontFamily: "Arial" }}>
-      <h2>Stoory Application</h2>
+    <div style={{ padding: "20px" }}>
+      <h1>Stoory Application</h1>
 
       <form onSubmit={submitForm}>
         <select name="role" value={form.role} onChange={handleChange}>
           <option value="Influencer">Influencer</option>
           <option value="Business">Business</option>
         </select>
-
         <br /><br />
 
         <input
@@ -73,7 +74,6 @@ export default function Apply() {
           onChange={handleChange}
           required
         />
-
         <br /><br />
 
         <input
@@ -83,7 +83,6 @@ export default function Apply() {
           onChange={handleChange}
           required
         />
-
         <br /><br />
 
         <input
@@ -93,7 +92,6 @@ export default function Apply() {
           onChange={handleChange}
           required
         />
-
         <br /><br />
 
         <input
@@ -104,7 +102,6 @@ export default function Apply() {
           onChange={handleChange}
           required
         />
-
         <br /><br />
 
         <input
@@ -113,7 +110,6 @@ export default function Apply() {
           value={form.insta_id}
           onChange={handleChange}
         />
-
         <br /><br />
 
         <button type="submit">Submit</button>
@@ -122,4 +118,4 @@ export default function Apply() {
       <p>{status}</p>
     </div>
   );
-};
+}
