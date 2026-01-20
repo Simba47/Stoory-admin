@@ -3,9 +3,14 @@ export default function Landing({ onInfluencer, onBrand }) {
     <div className="landing">
       {/* HEADER */}
       <header className="header">
-        <h2 className="logo">stoory</h2>
-        <div className="menu">☰</div>
-      </header>
+  <img
+    src="/logo/stoory-logo.png"
+    alt="Stoory"
+    className="logo-img"
+  />
+  <div className="menu">☰</div>
+</header>
+
 
       {/* HERO */}
       <section className="hero">
