@@ -20,42 +20,38 @@ router.post("/apply", async (req, res) => {
       price,
     } = req.body;
 
-    if (!role || !name || !mobile || !email) {
-      return res.status(400).json({ message: "All required fields missing" });
-    }
+    console.log("RECEIVED DATA:", req.body); // DEBUG
 
-    await pool.query(
-      `
-      INSERT INTO applications (
-        role,
-        name,
-        mobile,
-        email,
-        insta_id,
-        company_name,
-        location,
-        price
-      )
+    const query = `
+      INSERT INTO applications
+      (role, name, mobile, email, insta_id, company_name, location, price)
       VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-      `,
-      [
-        role,
-        name,
-        mobile,
-        email,
-        insta_id || null,
-        company_name || null,
-        location || null,
-        price || null,
-      ]
-    );
+      RETURNING *;
+    `;
 
-    res.json({ message: "Application saved successfully ✅" });
-  } catch (err) {
-    console.error("Apply error:", err.message);
-    res.status(500).json({ message: "Backend rejected request" });
+    const values = [
+      role,
+      name,
+      mobile,
+      email,
+      insta_id || null,
+      company_name || null,
+      location,
+      price,
+    ];
+
+    const result = await pool.query(query, values);
+
+    res.status(201).json({
+      message: "Application submitted",
+      data: result.rows[0],
+    });
+  } catch (error) {
+    console.error("ERROR:", error);
+    res.status(500).json({ message: "Server error" });
   }
 });
+
 
 /**
  * GET: All applications
