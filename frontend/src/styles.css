@@ -232,16 +232,6 @@ body {
   .buttons {
     flex-direction: row;
   }
-  /* =======================
-   STOORY HERO ANIMATION
-======================= */
-
-.hero-image {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 /* MAIN IMAGE */
 .hero-main {
