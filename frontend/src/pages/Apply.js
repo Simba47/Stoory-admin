@@ -86,12 +86,13 @@ export default function Apply() {
         {form.role === "brand" && (
           <>
             <input
-              name="company_name"
-              placeholder="Company Name"
-              value={form.company_name}
-              onChange={handleChange}
-              required
-            />
+  name="company_name"
+  value={form.company_name}
+  onChange={handleChange}
+  placeholder="Company Name"
+  required
+/>
+
             <br /><br />
           </>
         )}
