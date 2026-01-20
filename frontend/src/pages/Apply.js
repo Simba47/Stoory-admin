@@ -8,7 +8,6 @@ export default function Apply() {
     name: "",
     mobile: "",
     email: "",
-    insta_id: "",
   });
 
   const [status, setStatus] = useState("");
@@ -38,7 +37,6 @@ export default function Apply() {
         name: "",
         mobile: "",
         email: "",
-        insta_id: "",
       });
     } catch (err) {
       console.error(err);
@@ -57,16 +55,32 @@ export default function Apply() {
         </select>
         <br /><br />
 
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+        <input
+          name="name"
+          placeholder="Name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
         <br /><br />
 
-        <input name="mobile" placeholder="Mobile" value={form.mobile} onChange={handleChange} required />
+        <input
+          name="mobile"
+          placeholder="Mobile"
+          value={form.mobile}
+          onChange={handleChange}
+          required
+        />
         <br /><br />
 
-        <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <br /><br />
-
-        <input name="insta_id" placeholder="Instagram ID" value={form.insta_id} onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
         <br /><br />
 
         <button type="submit">Submit</button>
@@ -75,4 +89,4 @@ export default function Apply() {
       <p>{status}</p>
     </div>
   );
-                                                                 }
+            }
