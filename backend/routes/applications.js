@@ -5,6 +5,7 @@ const ExcelJS = require("exceljs");
 
 /**
  * POST: Apply
+ * URL: /api/applications/apply
  */
 router.post("/apply", async (req, res) => {
   try {
@@ -28,7 +29,8 @@ router.post("/apply", async (req, res) => {
 });
 
 /**
- * GET: All applications
+ * GET: All applications (Admin / API)
+ * URL: /api/applications
  */
 router.get("/", async (req, res) => {
   try {
@@ -46,6 +48,7 @@ router.get("/", async (req, res) => {
 
 /**
  * GET: Export Excel
+ * URL: /api/applications/export
  */
 router.get("/export", async (req, res) => {
   try {
