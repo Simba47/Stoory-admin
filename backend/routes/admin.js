@@ -17,5 +17,26 @@ router.get("/applications", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// UPDATE contacted status + notes
+router.patch("/applications/:id", async (req, res) => {
+  const { id } = req.params;
+  const { contacted, notes } = req.body;
+
+  try {
+    await pool.query(
+      `UPDATE applications
+       SET contacted = $1,
+           notes = $2
+       WHERE id = $3`,
+      [contacted, notes, id]
+    );
+
+    res.json({ message: "Application updated" });
+  } catch (err) {
+    console.error("Admin update error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 module.exports = router;
