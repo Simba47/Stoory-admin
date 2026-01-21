@@ -270,7 +270,7 @@ export default function Landing({ onInfluencer, onBrand }) {
     </p>
 
     <div className="founder">
-      <img src="/avatars/a1.png" alt="Founder" />
+      <img src="/avatars/pragnatej.png" alt="Founder" />
       <div>
         <strong>Pragnatej Kondala</strong>
         <p>Founder & CEO</p>
@@ -292,7 +292,7 @@ export default function Landing({ onInfluencer, onBrand }) {
   <div className="team-grid">
     {/* Founder */}
     <div className="team-card">
-      <img src="/avatars/a1.png" alt="Pragnatej Kondala" />
+      <img src="/avatars/pragnatej.png" alt="Pragnatej Kondala" />
       <h3>Pragnatej Kondala</h3>
       <p className="role">Founder & CEO</p>
       <p className="desc">
@@ -309,7 +309,7 @@ export default function Landing({ onInfluencer, onBrand }) {
 
     {/* Co-Founder */}
     <div className="team-card">
-      <img src="/avatars/a2.png" alt="Sarath Meduri" />
+      <img src="/avatars/sarath.png" alt="Sarath Meduri" />
       <h3>Sarath Meduri</h3>
       <p className="role">Co-Founder & CTO</p>
       <p className="desc">
@@ -326,7 +326,7 @@ export default function Landing({ onInfluencer, onBrand }) {
 
     {/* Co-Founder */}
     <div className="team-card">
-      <img src="/avatars/a3.png" alt="Kalyan Midatha" />
+      <img src="/avatars/kalyan.png" alt="Kalyan Midatha" />
       <h3>Kalyan Midatha</h3>
       <p className="role">Co-Founder & MD</p>
       <p className="desc">
