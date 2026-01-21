@@ -70,7 +70,7 @@ export default function Admin() {
 
           <tbody>
             {apps.map((app) => (
-              <tr key={app._id}>
+              <tr key={app.id}>
                 <td>{app.name}</td>
                 <td>{app.mobile}</td>
                 <td>{app.email}</td>
@@ -90,14 +90,14 @@ export default function Admin() {
                       // ✅ update ONLY this row
                       setApps((prev) =>
                         prev.map((a) =>
-                          a._id === app._id
+                          a._id === app.id
                             ? { ...a, contacted }
                             : a
                         )
                       );
 
                       // ✅ sync backend
-                      updateApplication(app._id, {
+                      updateApplication(app.id, {
                         contacted,
                         notes: app.notes || "",
                       });
@@ -116,14 +116,14 @@ export default function Admin() {
 
                       setApps((prev) =>
                         prev.map((a) =>
-                          a._id === app._id
+                          a._id === app.id
                             ? { ...a, notes }
                             : a
                         )
                       );
                     }}
                     onBlur={() =>
-                      updateApplication(app._id, {
+                      updateApplication(app.id, {
                         contacted: app.contacted,
                         notes: app.notes,
                       })
