@@ -54,6 +54,74 @@ export default function Landing({ onInfluencer, onBrand }) {
           <img src="/hero/stoory-hero.png" alt="Stoory Hero" />
         </div>
       </section>
+      {/* FEATURES */}
+<section className="features">
+  <h2>
+    Features Designed for <span>Growth</span>
+  </h2>
+
+  <p className="section-desc">
+    Our platform provides all the tools and features needed to establish
+    meaningful partnerships between brands and influencers.
+  </p>
+
+  <div className="feature-list">
+    <div className="feature-card">
+      <div className="feature-icon">🛡️</div>
+      <h4>100% Transparency</h4>
+      <p>
+        No middleman means complete visibility in every stage of your
+        promotion and collaboration.
+      </p>
+    </div>
+
+    <div className="feature-card">
+      <div className="feature-icon">🤝</div>
+      <h4>Direct Connection</h4>
+      <p>
+        Connect directly with brands or influencers that align with your
+        values and audience.
+      </p>
+    </div>
+
+    <div className="feature-card">
+      <div className="feature-icon">💳</div>
+      <h4>Secure Payments</h4>
+      <p>
+        Reliable payment processing with escrow protection for both
+        parties.
+      </p>
+    </div>
+
+    <div className="feature-card">
+      <div className="feature-icon">📈</div>
+      <h4>Real-Time Tracking</h4>
+      <p>
+        Monitor your campaigns' performance with real-time analytics and
+        insights.
+      </p>
+    </div>
+
+    <div className="feature-card">
+      <div className="feature-icon">📊</div>
+      <h4>Analytics Dashboard</h4>
+      <p>
+        Comprehensive analytics to help you optimize your collaborations
+        and ROI.
+      </p>
+    </div>
+
+    <div className="feature-card">
+      <div className="feature-icon">👤</div>
+      <h4>Easy Profile Setup</h4>
+      <p>
+        Create a compelling profile and portfolio to showcase your brand
+        or influence.
+      </p>
+    </div>
+  </div>
+</section>
+
 
       {/* HOW STOORY WORKS */}
       <section className="how">
