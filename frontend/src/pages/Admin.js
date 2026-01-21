@@ -1,107 +1,129 @@
 import { useEffect, useState } from "react";
 
-const API = "https://stoory-backend-e41q.onrender.com"; 
-// 🔴 change if backend URL is different
+const API = "https://stoory-backend-e41q.onrender.com";
+// If local: http://localhost:5000
 
 export default function Admin() {
   const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch all applications
-  useEffect(() => {
-    fetch(`${API}/api/admin/applications`)
-      .then(res => res.json())
-      .then(data => {
-        setApps(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
-
-  // Update contacted / notes
-  const updateApp = async (id, updates) => {
+  // 🔹 Fetch all applications
+  const fetchApplications = async () => {
     try {
-      await fetch(`${API}/api/admin/applications/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updates)
-      });
+      const res = await fetch(`${API}/api/applications`);
+      const data = await res.json();
+      setApps(data);
+      setLoading(false);
     } catch (err) {
-      console.error("Update failed", err);
+      console.error("Fetch failed", err);
+      setLoading(false);
     }
   };
 
-  if (loading) return <p style={{ padding: 20 }}>Loading...</p>;
+  useEffect(() => {
+    fetchApplications();
+  }, []);
+
+  // 🔹 Update contacted + notes
+  const updateApplication = async (id, contacted, notes) => {
+    try {
+      await fetch(`${API}/api/applications/${id}/contacted`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ contacted, notes }),
+      });
+    } catch (err) {
+      console.error("Update failed", err);
+      alert("Server error while updating");
+    }
+  };
+
+  if (loading) {
+    return <p style={{ padding: 20 }}>Loading applications...</p>;
+  }
 
   return (
     <div style={{ padding: 20 }}>
       <h2>Admin Panel – Applications</h2>
 
       <div style={{ overflowX: "auto", marginTop: 20 }}>
-        <table border="1" cellPadding="8" cellSpacing="0">
-          <thead>
+        <table
+          border="1"
+          cellPadding="8"
+          cellSpacing="0"
+          width="100%"
+          style={{ borderCollapse: "collapse" }}
+        >
+          <thead style={{ background: "#f2f2f2" }}>
             <tr>
               <th>Name</th>
               <th>Mobile</th>
               <th>Email</th>
               <th>Instagram</th>
               <th>Company</th>
+              <th>Location</th>
+              <th>Price</th>
               <th>Contacted</th>
               <th>Notes</th>
             </tr>
           </thead>
 
           <tbody>
-            {apps.map(app => (
-              <tr key={app.id}>
+            {apps.map((app) => (
+              <tr key={app._id}>
                 <td>{app.name}</td>
                 <td>{app.mobile}</td>
                 <td>{app.email}</td>
                 <td>{app.insta_id || "-"}</td>
                 <td>{app.company_name || "-"}</td>
+                <td>{app.location || "-"}</td>
+                <td>{app.price || "-"}</td>
 
-                {/* Contacted checkbox */}
+                {/* ✅ Contacted */}
                 <td style={{ textAlign: "center" }}>
                   <input
                     type="checkbox"
-                    checked={app.contacted}
-                    onChange={e => {
+                    checked={app.contacted || false}
+                    onChange={(e) => {
                       const updated = e.target.checked;
-                      setApps(prev =>
-                        prev.map(a =>
-                          a.id === app.id ? { ...a, contacted: updated } : a
+
+                      setApps((prev) =>
+                        prev.map((a) =>
+                          a._id === app._id
+                            ? { ...a, contacted: updated }
+                            : a
                         )
                       );
-                      updateApp(app.id, {
-                        contacted: updated,
-                        notes: app.notes
-                      });
+
+                      updateApplication(app._id, updated, app.notes || "");
                     }}
                   />
                 </td>
 
-                {/* Notes */}
+                {/* 📝 Notes */}
                 <td>
                   <input
                     style={{ width: "200px" }}
                     value={app.notes || ""}
                     placeholder="Add note..."
-                    onChange={e => {
+                    onChange={(e) => {
                       const value = e.target.value;
-                      setApps(prev =>
-                        prev.map(a =>
-                          a.id === app.id ? { ...a, notes: value } : a
+                      setApps((prev) =>
+                        prev.map((a) =>
+                          a._id === app._id
+                            ? { ...a, notes: value }
+                            : a
                         )
                       );
                     }}
                     onBlur={() =>
-                      updateApp(app.id, {
-                        contacted: app.contacted,
-                        notes: app.notes
-                      })
+                      updateApplication(
+                        app._id,
+                        app.contacted || false,
+                        app.notes || ""
+                      )
                     }
                   />
                 </td>
