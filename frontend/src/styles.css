@@ -420,27 +420,32 @@ body {
   font-weight: 700;
   margin: 22px 0 12px;
 }
-@media (min-width: 1200px) {
-  .mission-title {
-    font-size: 44px;
+@media (min-width: 1024px) {
+  .mission {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* left content | vision card */
+    column-gap: 60px;
+    align-items: start;
   }
 
-  .mission-text {
-    max-width: 720px;
-    font-size: 17px;
-  }
-
+  /* LEFT CONTENT STACK */
+  .mission-title,
+  .mission-sub,
+  .mission-text,
   .values-list {
-    max-width: 720px;
+    grid-column: 1;
   }
 
+  /* RIGHT VISION CARD */
   .vision-card {
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 36px;
+    grid-column: 2;
+    margin-top: 0;           /* critical */
+    position: relative;
+    top: -20px;              /* pulls it UP */
   }
 }
+
+
 
 /* =======================
    TEAM SECTION
