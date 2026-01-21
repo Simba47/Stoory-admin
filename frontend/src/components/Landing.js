@@ -282,6 +282,71 @@ export default function Landing({ onInfluencer, onBrand }) {
     </div>
   </div>
 </section>
+{/* MEET OUR TEAM */}
+<section className="team">
+  <h2 className="team-title">
+    Meet Our <span>Team</span>
+  </h2>
+
+  <p className="team-sub">
+    The passionate experts behind Stoory, dedicated to building a better
+    influencer ecosystem.
+  </p>
+
+  <div className="team-grid">
+    {/* Founder */}
+    <div className="team-card">
+      <img src="/avatars/a1.png" alt="Pragnatej Kondala" />
+      <h3>Pragnatej Kondala</h3>
+      <p className="role">Founder & CEO</p>
+      <p className="desc">
+        A serial entrepreneur with experience in building startups such as
+        Urbantask, Nikospade and more.
+      </p>
+
+      <div className="socials">
+        <span>in</span>
+        <span>𝕏</span>
+        <span>📷</span>
+      </div>
+    </div>
+
+    {/* Co-Founder */}
+    <div className="team-card">
+      <img src="/avatars/a2.png" alt="Sarath Meduri" />
+      <h3>Sarath Meduri</h3>
+      <p className="role">Co-Founder & CTO</p>
+      <p className="desc">
+        An alumnus of NIT Raipur with technical expertise in product
+        development and building scalable web systems.
+      </p>
+
+      <div className="socials">
+        <span>in</span>
+        <span>𝕏</span>
+        <span>📷</span>
+      </div>
+    </div>
+
+    {/* Co-Founder */}
+    <div className="team-card">
+      <img src="/avatars/a3.png" alt="Kalyan Midatha" />
+      <h3>Kalyan Midatha</h3>
+      <p className="role">Co-Founder & MD</p>
+      <p className="desc">
+        An alumnus of NIT Bhopal with experience leading growth initiatives
+        across multiple startups and organizations.
+      </p>
+
+      <div className="socials">
+        <span>in</span>
+        <span>𝕏</span>
+        <span>📷</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     </div>
   );
