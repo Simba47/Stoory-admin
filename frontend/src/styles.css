@@ -140,6 +140,23 @@ body {
   width: 100%;
   height: auto;
 }
+@media (min-width: 900px) {
+  .hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  .buttons {
+    flex-direction: row;
+  }
+
+  .hero-image {
+    margin-top: 0;
+  }
+}
+
 
 /* =======================
    HOW STOORY WORKS
