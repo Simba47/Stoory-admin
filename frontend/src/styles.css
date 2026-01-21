@@ -357,6 +357,21 @@ body {
   font-size: 14px;
   color: #666;
 }
+.mission-title {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 26px;
+}
+
+.mission-title span {
+  color: #2f6bff;
+}
+
+.mission-sub {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 22px 0 12px;
+}
 
 
 /* =======================
@@ -450,4 +465,36 @@ body {
     max-width: 1100px;
     margin: auto;
   }
+  /* SCROLL ANIMATION */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s ease;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 600;
+}
+
 }
