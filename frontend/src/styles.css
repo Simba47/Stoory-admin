@@ -357,6 +357,21 @@ body {
   font-size: 14px;
   color: #666;
 }
+.mission-title {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 26px;
+}
+
+.mission-title span {
+  color: #2f6bff;
+}
+
+.mission-sub {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 22px 0 12px;
+}
 
 /* =======================
    TEAM

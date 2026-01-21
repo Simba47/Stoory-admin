@@ -214,9 +214,14 @@ export default function Landing({ onInfluencer, onBrand }) {
           </div>
         )}
       </section>
-      {/* MISSION & VALUES */}
+     {/* MISSION & VISION */}
 <section className="mission">
-  <h2>Mission</h2>
+  <h2 className="mission-title">
+    Our <span>Mission & Vision</span>
+  </h2>
+
+  {/* Mission */}
+  <h3 className="mission-sub">Mission</h3>
 
   <p className="mission-text">
     To build a transparent and empowering influencer ecosystem where creators
@@ -224,7 +229,8 @@ export default function Landing({ onInfluencer, onBrand }) {
     together without the complications of middlemen or hidden fees.
   </p>
 
-  <h3>Values</h3>
+  {/* Values */}
+  <h3 className="mission-sub">Values</h3>
 
   <ul className="values-list">
     <li>
@@ -252,11 +258,11 @@ export default function Landing({ onInfluencer, onBrand }) {
     </li>
   </ul>
 
-  {/* VISION CARD */}
+  {/* Vision */}
   <div className="vision-card">
     <div className="vision-icon" />
 
-    <h3>Our Vision</h3>
+    <h3 className="vision-title">Our Vision</h3>
 
     <p className="vision-text">
       “To become the most trusted space where brands and influencers grow
@@ -272,6 +278,7 @@ export default function Landing({ onInfluencer, onBrand }) {
     </div>
   </div>
 </section>
+
 
     </div>
   );
