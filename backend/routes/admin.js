@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const pool = require(".utils/db"); // your PostgreSQL connection
+const pool = require("./utils/db"); // your PostgreSQL connection
 
 // GET all applications (Admin)
 router.get("/applications", async (req, res) => {
