@@ -8,11 +8,19 @@ const applicationSchema = new mongoose.Schema(
     mobile: String,
     email: String,
 
-    // ✅ NEW FIELD
+    company: String,
+    location: String,
+    price: Number,
+
     contacted: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+
+    notes: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

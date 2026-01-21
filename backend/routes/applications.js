@@ -20,26 +20,16 @@ router.post("/apply", async (req, res) => {
       price,
     } = req.body;
 
-    // Common validation
     if (!role || !name || !mobile || !email) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Role-based validation
-    if (role === "Influencer") {
-      if (!insta_id || !location || !price) {
-        return res.status(400).json({
-          message: "Influencer fields missing",
-        });
-      }
+    if (role === "Influencer" && (!insta_id || !location || !price)) {
+      return res.status(400).json({ message: "Influencer fields missing" });
     }
 
-    if (role === "Brand") {
-      if (!company_name || !location || !price) {
-        return res.status(400).json({
-          message: "Brand fields missing",
-        });
-      }
+    if (role === "Brand" && (!company_name || !location || !price)) {
+      return res.status(400).json({ message: "Brand fields missing" });
     }
 
     const query = `
@@ -51,9 +41,11 @@ router.post("/apply", async (req, res) => {
         insta_id,
         company_name,
         location,
-        price
+        price,
+        contacted,
+        notes
       )
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,false,'')
     `;
 
     const values = [
@@ -69,9 +61,7 @@ router.post("/apply", async (req, res) => {
 
     await pool.query(query, values);
 
-    res.status(200).json({
-      message: "Application saved successfully ✅",
-    });
+    res.json({ message: "Application saved successfully ✅" });
   } catch (err) {
     console.error("❌ Apply error:", err);
     res.status(500).json({ message: "Server error" });
@@ -95,6 +85,8 @@ router.get("/", async (req, res) => {
         company_name,
         location,
         price,
+        contacted,
+        notes,
         created_at
       FROM applications
       ORDER BY created_at DESC
@@ -108,7 +100,57 @@ router.get("/", async (req, res) => {
 });
 
 /* =================================================
-   GET: Export Excel
+   PATCH: Toggle Contacted (✔ FIXED)
+   URL: /api/applications/:id/contacted
+================================================= */
+router.patch("/:id/contacted", async (req, res) => {
+  try {
+    const { contacted } = req.body;
+
+    const result = await pool.query(
+      `
+      UPDATE applications
+      SET contacted = $1
+      WHERE id = $2
+      RETURNING *
+    `,
+      [contacted, req.params.id]
+    );
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("❌ Contacted update error:", err);
+    res.status(500).json({ message: "Failed to update contacted" });
+  }
+});
+
+/* =================================================
+   PATCH: Update Notes
+   URL: /api/applications/:id/notes
+================================================= */
+router.patch("/:id/notes", async (req, res) => {
+  try {
+    const { notes } = req.body;
+
+    const result = await pool.query(
+      `
+      UPDATE applications
+      SET notes = $1
+      WHERE id = $2
+      RETURNING *
+    `,
+      [notes, req.params.id]
+    );
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("❌ Notes update error:", err);
+    res.status(500).json({ message: "Failed to update notes" });
+  }
+});
+
+/* =================================================
+   GET: Export Excel (✔ includes contacted & notes)
    URL: /api/applications/export
 ================================================= */
 router.get("/export", async (req, res) => {
@@ -124,6 +166,8 @@ router.get("/export", async (req, res) => {
         company_name,
         location,
         price,
+        contacted,
+        notes,
         created_at
       FROM applications
       ORDER BY created_at DESC
@@ -139,9 +183,11 @@ router.get("/export", async (req, res) => {
       { header: "Mobile", key: "mobile", width: 18 },
       { header: "Email", key: "email", width: 30 },
       { header: "Instagram ID", key: "insta_id", width: 25 },
-      { header: "Company Name", key: "company_name", width: 25 },
+      { header: "Company", key: "company_name", width: 25 },
       { header: "Location", key: "location", width: 20 },
       { header: "Price", key: "price", width: 15 },
+      { header: "Contacted", key: "contacted", width: 12 },
+      { header: "Notes", key: "notes", width: 30 },
       { header: "Applied At", key: "created_at", width: 22 },
     ];
 
