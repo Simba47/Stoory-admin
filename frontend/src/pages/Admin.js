@@ -25,19 +25,7 @@ export default function Admin() {
   }, []);
 
   // 🔹 Update application (contacted / notes)
-  const updateApplication = async (id, payload) => {
-    try {
-      await fetch(`${API}/api/applications/${id}/contacted`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-    } catch (err) {
-      console.error("Update failed", err);
-      alert("Server error while updating");
-    }
-  };
-
+ 
   if (loading) {
     return <p style={{ padding: 20 }}>Loading applications...</p>;
   }
