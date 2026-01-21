@@ -7,37 +7,37 @@ export default function Landing({ onInfluencer, onBrand }) {
   return (
     <div className="landing">
       {/* NAVBAR */}
-<header className="navbar">
-  <div className="nav-left">
-    <img src="/logo.png" alt="Stoory" className="nav-logo" />
-  </div>
+ <header className="navbar">
+      {/* LOGO */}
+      <div className="nav-logo">
+        <img src="/logo.png" alt="Stoory" />
+      </div>
 
-  <nav className="nav-links">
-    <a href="#features">Features</a>
-    <a href="#how">How it Works</a>
-    <a href="#mission">Mission</a>
-    <a href="#team">Team</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
-  </nav>
+      {/* DESKTOP MENU */}
+      <nav className="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it Works</a>
+        <a href="#mission">Mission</a>
+        <a href="#team">Team</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-  <div className="nav-menu" onClick={() => setMenuOpen(!menuOpen)}>
-    ☰
-  </div>
+      {/* MOBILE HAMBURGER */}
+      <div className="hamburger" onClick={() => setOpen(!open)}>
+        ☰
+      </div>
 
-  {/* MOBILE MENU */}
-  {menuOpen && (
-    <div className="mobile-nav">
-      <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
-      <a href="#how" onClick={() => setMenuOpen(false)}>How it Works</a>
-      <a href="#mission" onClick={() => setMenuOpen(false)}>Mission</a>
-      <a href="#team" onClick={() => setMenuOpen(false)}>Team</a>
-      <a href="#faq" onClick={() => setMenuOpen(false)}>FAQ</a>
-      <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-    </div>
-  )}
-</header>
-
+      {/* MOBILE MENU */}
+      <div className={`mobile-menu ${open ? "show" : ""}`}>
+        <a onClick={() => setOpen(false)} href="#features">Features</a>
+        <a onClick={() => setOpen(false)} href="#how">How it Works</a>
+        <a onClick={() => setOpen(false)} href="#mission">Mission</a>
+        <a onClick={() => setOpen(false)} href="#team">Team</a>
+        <a onClick={() => setOpen(false)} href="#faq">FAQ</a>
+        <a onClick={() => setOpen(false)} href="#contact">Contact</a>
+      </div>
+    </header>
       {/* HERO SECTION */}
       <section className="hero">
         <div className="hero-text">

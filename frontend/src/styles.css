@@ -583,6 +583,7 @@ body {
 /* =======================
    NAVBAR
 ======================= */
+/* ================= NAVBAR ================= */
 .navbar {
   position: sticky;
   top: 0;
@@ -591,14 +592,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 60px;
+  padding: 18px 24px;
 }
 
-.nav-logo {
-  height: 28px;
+/* LOGO */
+.nav-logo img {
+  height: 34px;
 }
 
-/* LINKS */
+/* DESKTOP LINKS */
 .nav-links {
   display: flex;
   gap: 28px;
@@ -616,61 +618,46 @@ body {
 }
 
 /* HAMBURGER */
-.nav-menu {
+.hamburger {
   display: none;
-  font-size: 26px;
+  font-size: 28px;
   cursor: pointer;
 }
 
-/* =======================
-   MOBILE NAV
-======================= */
-.mobile-nav {
+/* MOBILE MENU */
+.mobile-menu {
   position: absolute;
-  top: 64px;
+  top: 72px;
   right: 20px;
-  background: white;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  width: 220px;
+  background: #fff;
   border-radius: 14px;
-  padding: 18px;
-  display: flex;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  display: none;
   flex-direction: column;
+  padding: 18px;
   gap: 14px;
 }
 
-.mobile-nav a {
+.mobile-menu a {
   text-decoration: none;
   color: #333;
   font-size: 15px;
-}
-html {
-  scroll-behavior: smooth;
-}
-section {
-  scroll-margin-top: 90px; /* height of navbar */
+  font-weight: 500;
 }
 
+.mobile-menu.show {
+  display: flex;
+}
 
-/* =======================
-   RESPONSIVE
-======================= */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
-  .navbar {
-    padding: 16px 20px;
-  }
-
   .nav-links {
     display: none;
   }
 
-  .nav-menu {
+  .hamburger {
     display: block;
   }
 }
-
-
-
 }
-
-
-
