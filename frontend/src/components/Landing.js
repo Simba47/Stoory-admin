@@ -183,7 +183,7 @@ export default function Landing({ onInfluencer, onBrand }) {
     </p>
 
     <div className="founder">
-      <img src="/avatars/a1.png" alt="Founder" />
+      <img src="/avatars/pragnatej.png" alt="Founder" />
       <div>
         <strong>Pragnatej Kondala</strong>
         <p>Founder & CEO</p>
