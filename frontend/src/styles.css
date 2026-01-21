@@ -406,10 +406,12 @@ body {
   color: #666;
 }
 .mission-title {
-  font-size: 30px;
+  font-size: 40px;        /* bigger */
   font-weight: 800;
-  margin-bottom: 26px;
+  margin-bottom: 16px;    /* less gap below */
+  line-height: 1.2;
 }
+
 
 .mission-title span {
   color: #2f6bff;
