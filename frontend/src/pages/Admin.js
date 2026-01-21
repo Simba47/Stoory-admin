@@ -79,14 +79,15 @@ export default function Admin() {
                 <td>{app.location || "-"}</td>
                 <td>{app.price || "-"}</td>
 
-                {/* ✅ Contacted checkbox */}
+                {/* ✅ FIXED Contacted checkbox */}
                 <td style={{ textAlign: "center" }}>
                   <input
                     type="checkbox"
-                    checked={!!app.contacted}
+                    checked={Boolean(app.contacted)}
                     onChange={(e) => {
                       const contacted = e.target.checked;
 
+                      // ✅ update ONLY this row
                       setApps((prev) =>
                         prev.map((a) =>
                           a._id === app._id
@@ -95,6 +96,7 @@ export default function Admin() {
                         )
                       );
 
+                      // ✅ sync backend
                       updateApplication(app._id, {
                         contacted,
                         notes: app.notes || "",
@@ -103,7 +105,7 @@ export default function Admin() {
                   />
                 </td>
 
-                {/* 📝 Notes */}
+                {/* 📝 FIXED Notes input */}
                 <td>
                   <input
                     style={{ width: "200px" }}
@@ -111,6 +113,7 @@ export default function Admin() {
                     placeholder="Add note..."
                     onChange={(e) => {
                       const notes = e.target.value;
+
                       setApps((prev) =>
                         prev.map((a) =>
                           a._id === app._id
@@ -119,10 +122,10 @@ export default function Admin() {
                         )
                       );
                     }}
-                    onBlur={(e) =>
+                    onBlur={() =>
                       updateApplication(app._id, {
-                        contacted: app.contacted || false,
-                        notes: e.target.value,
+                        contacted: app.contacted,
+                        notes: app.notes,
                       })
                     }
                   />
