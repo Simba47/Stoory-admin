@@ -133,64 +133,7 @@ export default function Landing({ onInfluencer, onBrand }) {
           Our streamlined process makes collaboration simple, transparent,
           and effective for both influencers and brands.
         </p>
-        {/* MISSION & VISION */}
-<section className="mission">
-  <h2>Mission</h2>
-
-  <p className="mission-text">
-    To build a transparent and empowering influencer ecosystem where creators
-    and brands connect directly, foster authentic relationships, and grow
-    together without the complications of middlemen or hidden fees.
-  </p>
-
-  <h3>Values</h3>
-
-  <ul className="values-list">
-    <li>
-      <span className="dot" />
-      <strong>Transparency:</strong> We believe in complete visibility in all
-      transactions and relationships.
-    </li>
-
-    <li>
-      <span className="dot" />
-      <strong>Empowerment:</strong> We give both creators and brands the tools
-      and support to succeed.
-    </li>
-
-    <li>
-      <span className="dot" />
-      <strong>Community:</strong> We foster meaningful connections that drive
-      mutual growth.
-    </li>
-
-    <li>
-      <span className="dot" />
-      <strong>Innovation:</strong> We continuously improve our platform based
-      on user feedback.
-    </li>
-  </ul>
-
-  {/* VISION CARD */}
-  <div className="vision-card">
-    <div className="vision-icon" />
-
-    <h3>Our Vision</h3>
-
-    <p className="vision-text">
-      “To become the most trusted space where brands and influencers grow
-      together.”
-    </p>
-
-    <div className="founder">
-      <img src="/avatars/pragnatej.png" alt="Founder" />
-      <div>
-        <strong>Pragnatej Kondala</strong>
-        <p>Founder & CEO</p>
-      </div>
-    </div>
-  </div>
-</section>
+ 
 
 
         {/* TOGGLE */}
@@ -269,6 +212,64 @@ export default function Landing({ onInfluencer, onBrand }) {
                 Create campaigns, set deliverables, and monitor real-time
                 performance metrics.
               </p>
+                     {/* MISSION & VISION */}
+<section className="mission">
+  <h2>Mission</h2>
+
+  <p className="mission-text">
+    To build a transparent and empowering influencer ecosystem where creators
+    and brands connect directly, foster authentic relationships, and grow
+    together without the complications of middlemen or hidden fees.
+  </p>
+
+  <h3>Values</h3>
+
+  <ul className="values-list">
+    <li>
+      <span className="dot" />
+      <strong>Transparency:</strong> We believe in complete visibility in all
+      transactions and relationships.
+    </li>
+
+    <li>
+      <span className="dot" />
+      <strong>Empowerment:</strong> We give both creators and brands the tools
+      and support to succeed.
+    </li>
+
+    <li>
+      <span className="dot" />
+      <strong>Community:</strong> We foster meaningful connections that drive
+      mutual growth.
+    </li>
+
+    <li>
+      <span className="dot" />
+      <strong>Innovation:</strong> We continuously improve our platform based
+      on user feedback.
+    </li>
+  </ul>
+
+  {/* VISION CARD */}
+  <div className="vision-card">
+    <div className="vision-icon" />
+
+    <h3>Our Vision</h3>
+
+    <p className="vision-text">
+      “To become the most trusted space where brands and influencers grow
+      together.”
+    </p>
+
+    <div className="founder">
+      <img src="/avatars/pragnatej.png" alt="Founder" />
+      <div>
+        <strong>Pragnatej Kondala</strong>
+        <p>Founder & CEO</p>
+      </div>
+    </div>
+  </div>
+</section>
             </div>
           </div>
         )}
