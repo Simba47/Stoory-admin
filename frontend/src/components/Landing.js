@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function Landing({ onInfluencer, onBrand }) {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const [active, setActive] = useState("influencer");
   // Scroll animation observer
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -101,25 +101,24 @@ export default function Landing({ onInfluencer, onBrand }) {
 
 
       {/* HOW STOORY WORKS */}
-      {/* HOW STOORY WORKS */}
-<section id="how" className="how fade-up">
+     <section id="how" className="how fade-up">
   <h2>
     How <span>Stoory</span> Works
   </h2>
 
-  <p className="how-desc">
+  <p className="section-desc">
     Our streamlined process makes collaboration simple, transparent,
     and effective for both influencers and brands.
   </p>
 
-  {/* TOGGLE */}
-  <div className="how-toggle">
+  <div className="toggle">
     <button
       className={active === "influencer" ? "active" : ""}
       onClick={() => setActive("influencer")}
     >
       For Influencers
     </button>
+
     <button
       className={active === "brand" ? "active" : ""}
       onClick={() => setActive("brand")}
@@ -128,70 +127,21 @@ export default function Landing({ onInfluencer, onBrand }) {
     </button>
   </div>
 
-  {/* STEPS */}
-  <div className="how-steps">
-    {active === "influencer" && (
-      <>
-        <div className="how-card fade-up">
-          <div className="step">1</div>
-          <h4>Create Your Profile</h4>
-          <p>
-            Showcase your content, audience demographics, engagement rates,
-            and previous collaborations.
-          </p>
-        </div>
+  {active === "influencer" && (
+    <>
+      <div className="how-step"><span>1</span>Create Your Profile</div>
+      <div className="how-step"><span>2</span>Connect With Brands</div>
+      <div className="how-step"><span>3</span>Collaborate & Earn</div>
+    </>
+  )}
 
-        <div className="how-card fade-up">
-          <div className="step">2</div>
-          <h4>Connect With Brands</h4>
-          <p>
-            Browse brand opportunities or receive direct collaboration
-            requests that match your niche.
-          </p>
-        </div>
-
-        <div className="how-card fade-up">
-          <div className="step">3</div>
-          <h4>Collaborate & Earn</h4>
-          <p>
-            Accept offers, deliver content, and receive secure payments
-            without any middleman fees.
-          </p>
-        </div>
-      </>
-    )}
-
-    {active === "brand" && (
-      <>
-        <div className="how-card fade-up">
-          <div className="step">1</div>
-          <h4>Set Up Your Brand</h4>
-          <p>
-            Create your brand profile, showcase products, and define
-            campaign goals.
-          </p>
-        </div>
-
-        <div className="how-card fade-up">
-          <div className="step">2</div>
-          <h4>Find Perfect Influencers</h4>
-          <p>
-            Search and filter influencers by niche, audience demographics,
-            and engagement rates.
-          </p>
-        </div>
-
-        <div className="how-card fade-up">
-          <div className="step">3</div>
-          <h4>Launch & Track Campaigns</h4>
-          <p>
-            Create campaigns, set deliverables, and monitor real-time
-            performance metrics.
-          </p>
-        </div>
-      </>
-    )}
-  </div>
+  {active === "brand" && (
+    <>
+      <div className="how-step"><span>1</span>Set Up Your Brand</div>
+      <div className="how-step"><span>2</span>Find Perfect Influencers</div>
+      <div className="how-step"><span>3</span>Launch & Track Campaigns</div>
+    </>
+  )}
 </section>
 
     <section id="mission" className="mission fade-up">
