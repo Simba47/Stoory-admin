@@ -1,137 +1,86 @@
 import { useEffect, useState } from "react";
 
-const API = "https://stoory-backend-e41q.onrender.com";
-// local: http://localhost:5000
+const API_URL = "https://stoory-backend-e41q.onrender.com/api/applications";
 
 export default function Admin() {
-  const [apps, setApps] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [applications, setApplications] = useState([]);
 
-  // 🔹 Fetch applications
-  const fetchApplications = async () => {
-    try {
-      const res = await fetch(`${API}/api/applications`);
-      const data = await res.json();
-      setApps(data);
-    } catch (err) {
-      console.error("Fetch failed", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // Fetch data
   useEffect(() => {
-    fetchApplications();
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => setApplications(data))
+      .catch(err => console.error(err));
   }, []);
 
-  // 🔹 Update application (contacted / notes)
-  const updateApplication = async (id, payload) => {
+  // Toggle contacted (ONLY ONE ROW)
+  const toggleContacted = async (id, currentValue) => {
     try {
-      await fetch(`${API}/api/applications/${id}/contacted`, {
+      await fetch(`${API_URL}/${id}/contacted`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ contacted: !currentValue }),
       });
+
+      // ✅ Update only clicked row in state
+      setApplications(prev =>
+        prev.map(app =>
+          app._id === id
+            ? { ...app, contacted: !currentValue }
+            : app
+        )
+      );
     } catch (err) {
-      console.error("Update failed", err);
-      alert("Server error while updating");
+      console.error(err);
     }
   };
 
-  if (loading) {
-    return <p style={{ padding: 20 }}>Loading applications...</p>;
-  }
-
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Admin Panel – Applications</h2>
+    <div>
+      <h2>Admin Panel</h2>
 
-      <div style={{ overflowX: "auto", marginTop: 20 }}>
-        <table
-          border="1"
-          cellPadding="8"
-          cellSpacing="0"
-          width="100%"
-          style={{ borderCollapse: "collapse" }}
-        >
-          <thead style={{ background: "#f2f2f2" }}>
-            <tr>
-              <th>Name</th>
-              <th>Mobile</th>
-              <th>Email</th>
-              <th>Instagram</th>
-              <th>Company</th>
-              <th>Location</th>
-              <th>Price</th>
-              <th>Contacted</th>
-              <th>Notes</th>
+      <table border="1" cellPadding="6">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Contacted</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {applications.map(app => (
+            <tr key={app._id}>
+              <td>{app.name || "-"}</td>
+              <td>{app.company || "-"}</td>
+              <td>{app.location || "-"}</td>
+              <td>{app.price || "-"}</td>
+
+              {/* ✅ FIXED CHECKBOX */}
+              <td style={{ textAlign: "center" }}>
+                <input
+                  type="checkbox"
+                  checked={app.contacted || false}
+                  onChange={() =>
+                    toggleContacted(app._id, app.contacted)
+                  }
+                />
+              </td>
+
+              <td>
+                <input
+                  type="text"
+                  placeholder="Add note..."
+                  defaultValue={app.notes || ""}
+                />
+              </td>
             </tr>
-          </thead>
-
-          <tbody>
-            {apps.map((app) => (
-              <tr key={app._id}>
-                <td>{app.name}</td>
-                <td>{app.mobile}</td>
-                <td>{app.email}</td>
-                <td>{app.insta_id || "-"}</td>
-                <td>{app.company_name || "-"}</td>
-                <td>{app.location || "-"}</td>
-                <td>{app.price || "-"}</td>
-
-                {/* ✅ Contacted checkbox */}
-                <td style={{ textAlign: "center" }}>
-                  <input
-                    type="checkbox"
-                    checked={!!app.contacted}
-                    onChange={(e) => {
-                      const contacted = e.target.checked;
-
-                      setApps((prev) =>
-                        prev.map((a) =>
-                          a._id === app._id
-                            ? { ...a, contacted }
-                            : a
-                        )
-                      );
-
-                      updateApplication(app._id, {
-                        contacted,
-                        notes: app.notes || "",
-                      });
-                    }}
-                  />
-                </td>
-
-                {/* 📝 Notes */}
-                <td>
-                  <input
-                    style={{ width: "200px" }}
-                    value={app.notes || ""}
-                    placeholder="Add note..."
-                    onChange={(e) => {
-                      const notes = e.target.value;
-                      setApps((prev) =>
-                        prev.map((a) =>
-                          a._id === app._id
-                            ? { ...a, notes }
-                            : a
-                        )
-                      );
-                    }}
-                    onBlur={(e) =>
-                      updateApplication(app._id, {
-                        contacted: app.contacted || false,
-                        notes: e.target.value,
-                      })
-                    }
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
