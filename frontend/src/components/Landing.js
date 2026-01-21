@@ -1,8 +1,10 @@
 import { useState } from "react";
 
+export default function Landing({ onInfluencer, onBrand }) {
+  const [active, setActive] = useState("brand");
+  const [menuOpen, setMenuOpen] = useState(false);} // ✅ NAVBAR STATE
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-
 
   return (
     <div className="landing">
