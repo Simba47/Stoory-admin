@@ -3,6 +3,9 @@ import Landing from "./components/Landing";
 import InfluencerModal from "./components/InfluencerModal";
 import BrandModal from "./components/BrandModal";
 import "./styles.css";
+import Admin from "./pages/Admin";
+<Route path="/admin" element={<Admin />} />
+
 
 function App() {
   const [showInfluencer, setShowInfluencer] = useState(false);
