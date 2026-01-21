@@ -33,7 +33,25 @@ export default function Admin() {
   return (
     <div style={{ padding: 20 }}>
       <h2>Admin Panel – Applications</h2>
-
+       <button
+  onClick={() => {
+    window.location.href =
+      "https://stoory-backend-e41q.onrender.com/api/applications/export";
+  }}
+  style={{
+    padding: "10px 16px",
+    marginTop: "10px",
+    marginBottom: "15px",
+    backgroundColor: "#28a745",
+    color: "#fff",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "600"
+  }}
+>
+  ⬇ Download Excel
+</button>
       <div style={{ overflowX: "auto", marginTop: 20 }}>
         <table
           border="1"
