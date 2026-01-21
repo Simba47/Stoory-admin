@@ -418,10 +418,11 @@ body {
 }
 
 .mission-sub {
-  font-size: 22px;
+  font-size: 26px;     /* bigger */
   font-weight: 700;
-  margin: 22px 0 12px;
+  margin: 16px 0 8px;  /* tighter */
 }
+
 @media (min-width: 1024px) {
   .mission {
     display: grid;
