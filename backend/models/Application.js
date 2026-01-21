@@ -7,6 +7,12 @@ const applicationSchema = new mongoose.Schema(
     dob: String,
     mobile: String,
     email: String,
+
+    // ✅ NEW FIELD
+    contacted: {
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );
