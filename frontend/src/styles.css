@@ -584,36 +584,23 @@ body {
    NAVBAR
 ======================= */
 /* ================= NAVBAR ================= */
-/* =========================
-   NAVBAR
-========================= */
-
 .navbar {
-  width: 100%;
-  background: #fff;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid #eee;
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 20px;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 18px 24px;
 }
 
 /* LOGO */
-.logo {
-  font-size: 28px;
-  font-weight: 800;
-  color: #2f6df6;
+.nav-logo img {
+  height: 34px;
 }
 
-/* LINKS (DESKTOP) */
+/* DESKTOP LINKS */
 .nav-links {
   display: flex;
   gap: 28px;
@@ -621,53 +608,56 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #222;
+  color: #666;
+  font-size: 15px;
   font-weight: 500;
-  font-size: 16px;
 }
 
 .nav-links a:hover {
-  color: #2f6df6;
+  color: #2f6bff;
 }
 
 /* HAMBURGER */
-.menu-btn {
+.hamburger {
   display: none;
-  background: none;
-  border: none;
   font-size: 28px;
   cursor: pointer;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE MENU */
+.mobile-menu {
+  position: absolute;
+  top: 72px;
+  right: 20px;
+  width: 220px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  display: none;
+  flex-direction: column;
+  padding: 18px;
+  gap: 14px;
+}
 
-@media (max-width: 768px) {
-  .menu-btn {
-    display: block;
-  }
+.mobile-menu a {
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+}
 
+.mobile-menu.show {
+  display: flex;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
   .nav-links {
-    position: absolute;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    background: #fff;
-    flex-direction: column;
-    gap: 0;
     display: none;
-    border-top: 1px solid #eee;
   }
 
-  .nav-links a {
-    padding: 14px 20px;
-    border-bottom: 1px solid #f1f1f1;
-    font-size: 16px;
-  }
-
-  .nav-links.open {
-    display: flex;
+  .hamburger {
+    display: block;
   }
 }
 }
