@@ -44,6 +44,8 @@ body {
    HERO
 ======================= */
 .hero {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,6 +110,9 @@ body {
 }
 
 .primary {
+  position: relative;
+  z-index: 5;
+  pointer-events: auto;
   background: #2f6bff;
   color: white;
   border: none;
@@ -119,6 +124,9 @@ body {
 }
 
 .secondary {
+  position: relative;
+  z-index: 5;
+  pointer-events: auto;
   background: transparent;
   color: #2f6bff;
   border: 2px solid #2f6bff;
@@ -648,6 +656,12 @@ body {
 
 .mobile-menu.show {
   display: flex;
+}
+.nav-links.open{
+  display: flex;
+}
+.nav-container{
+  position: relative;
 }
 
 /* ================= RESPONSIVE ================= */
