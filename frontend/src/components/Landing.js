@@ -3,10 +3,11 @@ import Navbar from "./Navbar"
 
 export default function Landing({ onInfluencer, onBrand }) {
   const [active, setActive] = useState("brand");
-  const [menuOpen, setMenuOpen] = useState(false); // ✅ NAVBAR STATE
+  
 
   return (
     <div className="landing">
+      <Navbar/>
      
       {/* HERO SECTION */}
       <section className="hero">
