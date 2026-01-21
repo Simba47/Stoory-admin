@@ -192,26 +192,6 @@ body {
   color: #2f6bff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
-.toggle {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin: 24px 0;
-}
-
-.toggle button {
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  background: #f2f2f2;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.toggle button.active {
-  background: #2f6bff;
-  color: white;
-}
 
 /* STEPS */
 .how-steps {
@@ -293,6 +273,7 @@ body {
   font-size: 20px;
   margin-bottom: 12px;
 }
+
 
 /* MISSION & VALUES */
 .mission {
@@ -485,36 +466,4 @@ body {
     max-width: 1100px;
     margin: auto;
   }
-  /* SCROLL ANIMATION */
-.fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.7s ease;
-}
-
-.fade-up.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* MOBILE MENU */
-.mobile-menu {
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.mobile-menu a {
-  text-decoration: none;
-  color: #222;
-  font-weight: 600;
-}
-
 }

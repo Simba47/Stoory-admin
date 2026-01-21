@@ -1,198 +1,283 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Landing({ onInfluencer, onBrand }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState("influencer");
-  // Scroll animation observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const [active, setActive] = useState("brand");
+  const [menuOpen, setMenuOpen] = useState(false); // ✅ NAVBAR STATE
 
   return (
     <div className="landing">
-      {/* NAVBAR */}
+      {/* HEADER */}
       <header className="header">
-        <img src="/hero/stoory-logo.png" className="logo" alt="Stoory" />
+        <img src="/logo.png" alt="stoory" className="logo-img" />
 
         <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
           ☰
         </div>
 
+        {/* MOBILE NAV */}
         {menuOpen && (
-          <nav className="mobile-menu">
-            <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
-            <a href="#how" onClick={() => setMenuOpen(false)}>How it Works</a>
-            <a href="#mission" onClick={() => setMenuOpen(false)}>Mission</a>
-            <a href="#team" onClick={() => setMenuOpen(false)}>Team</a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+          <nav className="mobile-nav">
+            <a href="#features" onClick={() => setMenuOpen(false)}>
+              Features
+            </a>
+            <a href="#how" onClick={() => setMenuOpen(false)}>
+              How it Works
+            </a>
+            <a href="#mission" onClick={() => setMenuOpen(false)}>
+              Mission
+            </a>
+            <a href="#team" onClick={() => setMenuOpen(false)}>
+              Team
+            </a>
           </nav>
         )}
       </header>
 
+      {/* HERO SECTION */}
+      <section className="hero">
+        <div className="hero-text">
+          <h1>
+            we don't tell stories,
+            <br />
+            we <span>STOORY</span> them.
+          </h1>
 
- <section className="hero fade-up">
-  <div className="hero-text">
-    <h1>
-      we don't tell stories,<br />
-      we <span>STOORY</span> them.
-    </h1>
+          <p className="subtitle">
+            Transparent. Direct. Empowered. Stoory eliminates middlemen,
+            ensuring 100% transparency in every promotion.
+          </p>
 
-    <p className="subtitle">
-      Transparent. Direct. Empowered. Stoory eliminates middlemen,
-      ensuring 100% transparency in every promotion.
-    </p>
+          <div className="buttons">
+            <button className="primary" onClick={onInfluencer}>
+              Join as Influencer →
+            </button>
 
-    <div className="buttons">
-      <button className="primary" onClick={onInfluencer}>
-        Join as Influencer →
-      </button>
-      <button className="secondary" onClick={onBrand}>
-        Join as Brand →
-      </button>
-    </div>
+            <button className="secondary" onClick={onBrand}>
+              Join as Brand →
+            </button>
+          </div>
 
-    <div className="trusted-row">
-      <div className="avatars">
-        <img src="/avatars/a1.png" />
-        <img src="/avatars/a2.png" />
-        <img src="/avatars/a3.png" />
-      </div>
-      <p>Trusted by 5,000+ influencers & brands</p>
-    </div>
-  </div>
+          <div className="trusted">
+            <div className="avatars">
+              <img src="/avatars/a1.png" alt="" />
+              <img src="/avatars/a2.png" alt="" />
+              <img src="/avatars/a3.png" alt="" />
+            </div>
+            <span>Trusted by 5,000+ influencers & brands</span>
+          </div>
+        </div>
 
-  <div className="hero-image">
-    <img src="/hero/stoory-hero.png" alt="Stoory hero" />
-  </div>
-</section>
+        <div className="hero-image">
+          <img src="/hero/stoory-hero.png" alt="Stoory Hero" />
+        </div>
+      </section>
 
-     <section id="features" className="features fade-up">
-  <h2>
-    Features Designed for <span>Growth</span>
-  </h2>
-  <p className="section-desc">
-    Our platform provides all the tools and features needed to establish
-    meaningful partnerships between brands and influencers.
-  </p>
+      {/* FEATURES */}
+      <section className="features" id="features">
+        <h2>
+          Features Designed for <span>Growth</span>
+        </h2>
 
-  <div className="feature-list">
-    <div className="feature-card">100% Transparency</div>
-    <div className="feature-card">Direct Connection</div>
-    <div className="feature-card">Secure Payments</div>
-    <div className="feature-card">Real-Time Tracking</div>
-    <div className="feature-card">Analytics Dashboard</div>
-    <div className="feature-card">Easy Profile Setup</div>
-  </div>
-</section>
+        <p className="section-desc">
+          Our platform provides all the tools and features needed to establish
+          meaningful partnerships between brands and influencers.
+        </p>
 
+        <div className="feature-list">
+          <div className="feature-card">
+            <h4>100% Transparency</h4>
+            <p>No middleman means complete visibility.</p>
+          </div>
 
+          <div className="feature-card">
+            <h4>Direct Connection</h4>
+            <p>Connect directly with brands or influencers.</p>
+          </div>
+
+          <div className="feature-card">
+            <h4>Secure Payments</h4>
+            <p>Escrow-protected reliable payments.</p>
+          </div>
+
+          <div className="feature-card">
+            <h4>Real-Time Tracking</h4>
+            <p>Monitor campaign performance.</p>
+          </div>
+
+          <div className="feature-card">
+            <h4>Analytics Dashboard</h4>
+            <p>Optimize collaborations and ROI.</p>
+          </div>
+
+          <div className="feature-card">
+            <h4>Easy Profile Setup</h4>
+            <p>Create compelling profiles easily.</p>
+          </div>
+        </div>
+      </section>
 
       {/* HOW STOORY WORKS */}
-     <section id="how" className="how fade-up">
-  <h2>
-    How <span>Stoory</span> Works
-  </h2>
+      <section className="how" id="how">
+        <h2>
+          How <span>Stoory</span> Works
+        </h2>
 
-  <p className="section-desc">
-    Our streamlined process makes collaboration simple, transparent,
-    and effective for both influencers and brands.
-  </p>
+        <p className="how-desc">
+          Our streamlined process makes collaboration simple and transparent.
+        </p>
 
-  <div className="toggle">
-    <button
-      className={active === "influencer" ? "active" : ""}
-      onClick={() => setActive("influencer")}
-    >
-      For Influencers
-    </button>
+        <div className="how-toggle">
+          <button
+            className={active === "influencer" ? "active" : ""}
+            onClick={() => setActive("influencer")}
+          >
+            For Influencers
+          </button>
+          <button
+            className={active === "brand" ? "active" : ""}
+            onClick={() => setActive("brand")}
+          >
+            For Brands
+          </button>
+        </div>
 
-    <button
-      className={active === "brand" ? "active" : ""}
-      onClick={() => setActive("brand")}
-    >
-      For Brands
-    </button>
-  </div>
+        {active === "influencer" && (
+          <div className="how-steps">
+            <div className="how-card">
+              <div className="step">1</div>
+              <h4>Create Your Profile</h4>
+              <p>Showcase content and engagement.</p>
+            </div>
 
-  {active === "influencer" && (
-    <>
-      <div className="how-step"><span>1</span>Create Your Profile</div>
-      <div className="how-step"><span>2</span>Connect With Brands</div>
-      <div className="how-step"><span>3</span>Collaborate & Earn</div>
-    </>
-  )}
+            <div className="how-card">
+              <div className="step">2</div>
+              <h4>Connect With Brands</h4>
+              <p>Receive collaboration requests.</p>
+            </div>
 
-  {active === "brand" && (
-    <>
-      <div className="how-step"><span>1</span>Set Up Your Brand</div>
-      <div className="how-step"><span>2</span>Find Perfect Influencers</div>
-      <div className="how-step"><span>3</span>Launch & Track Campaigns</div>
-    </>
-  )}
-</section>
+            <div className="how-card">
+              <div className="step">3</div>
+              <h4>Collaborate & Earn</h4>
+              <p>Deliver content and get paid.</p>
+            </div>
+          </div>
+        )}
 
-    <section id="mission" className="mission fade-up">
-  <h2>
+        {active === "brand" && (
+          <div className="how-steps">
+            <div className="how-card">
+              <div className="step">1</div>
+              <h4>Set Up Your Brand</h4>
+              <p>Create brand profile and goals.</p>
+            </div>
+
+            <div className="how-card">
+              <div className="step">2</div>
+              <h4>Find Influencers</h4>
+              <p>Filter by niche and engagement.</p>
+            </div>
+
+            <div className="how-card">
+              <div className="step">3</div>
+              <h4>Launch Campaigns</h4>
+              <p>Track performance in real time.</p>
+            </div>
+          </div>
+        )}
+      </section>
+
+    {/* MISSION & VISION */}
+<section className="mission">
+  <h2 className="mission-title">
     Our <span>Mission & Vision</span>
   </h2>
 
-  <h3>Mission</h3>
-  <p>
-    To build a transparent and empowering influencer ecosystem where
-    creators and brands connect directly and grow together.
+  {/* Mission */}
+  <h3 className="mission-sub">Mission</h3>
+
+  <p className="mission-text">
+    To build a transparent and empowering influencer ecosystem where creators
+    and brands connect directly, foster authentic relationships, and grow
+    together without the complications of middlemen or hidden fees.
   </p>
 
-  <h3>Values</h3>
-  <ul className="values">
-    <li>Transparency</li>
-    <li>Empowerment</li>
-    <li>Community</li>
-    <li>Innovation</li>
+  {/* Values */}
+  <h3 className="mission-sub">Values</h3>
+
+  <ul className="values-list">
+    <li>
+      <span className="dot" />
+      <strong>Transparency:</strong> We believe in complete visibility in all
+      transactions and relationships.
+    </li>
+
+    <li>
+      <span className="dot" />
+      <strong>Empowerment:</strong> We give both creators and brands the tools
+      and support to succeed.
+    </li>
+
+    <li>
+      <span className="dot" />
+      <strong>Community:</strong> We foster meaningful connections that drive
+      mutual growth.
+    </li>
+
+    <li>
+      <span className="dot" />
+      <strong>Innovation:</strong> We continuously improve our platform based
+      on user feedback.
+    </li>
   </ul>
 
-  <div className="vision-box">
-    <h3>Our Vision</h3>
-    <p>
-      “To become the most trusted space where brands and influencers grow together.”
+  {/* Vision */}
+  <div className="vision-card">
+    <div className="vision-icon" />
+
+    <h3 className="vision-title">Our Vision</h3>
+
+    <p className="vision-text">
+      “To become the most trusted space where brands and influencers grow
+      together.”
     </p>
 
     <div className="founder">
-      <img src="/avatars/a1.png" />
+      <img src="/avatars/pragnatej.png" alt="Founder" />
       <div>
         <strong>Pragnatej Kondala</strong>
-        <span>Founder & CEO</span>
+        <p>Founder & CEO</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="team" className="team fade-up">
-  <h2>Meet Our <span>Team</span></h2>
-  <p>The passionate experts behind Stoory.</p>
 
-  <div className="team-grid">
-    <div className="team-card">Pragnatej Kondala</div>
-    <div className="team-card">Sarath Meduri</div>
-    <div className="team-card">Kalyan Midatha</div>
-  </div>
-</section>
+      {/* TEAM */}
+      <section className="team" id="team">
+        <h2>
+          Meet Our <span>Team</span>
+        </h2>
 
+        <div className="team-grid">
+          <div className="team-card">
+            <img src="/avatars/pragnatej.png" alt="" />
+            <h3>Pragnatej Kondala</h3>
+            <p>Founder & CEO</p>
+          </div>
 
+          <div className="team-card">
+            <img src="/avatars/sarath.png" alt="" />
+            <h3>Sarath Meduri</h3>
+            <p>Co-Founder & CTO</p>
+          </div>
 
+          <div className="team-card">
+            <img src="/avatars/kalyan.png" alt="" />
+            <h3>Kalyan Midatha</h3>
+            <p>Co-Founder & MD</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
-
