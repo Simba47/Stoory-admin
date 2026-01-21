@@ -6,32 +6,37 @@ export default function Landing({ onInfluencer, onBrand }) {
 
   return (
     <div className="landing">
-      {/* HEADER */}
-      <header className="header">
-        <img src="/logo.png" alt="stoory" className="logo-img" />
+      {/* NAVBAR */}
+<header className="navbar">
+  <div className="nav-left">
+    <img src="/logo.png" alt="Stoory" className="nav-logo" />
+  </div>
 
-        <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
-        </div>
+  <nav className="nav-links">
+    <a href="#features">Features</a>
+    <a href="#how">How it Works</a>
+    <a href="#mission">Mission</a>
+    <a href="#team">Team</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-        {/* MOBILE NAV */}
-        {menuOpen && (
-          <nav className="mobile-nav">
-            <a href="#features" onClick={() => setMenuOpen(false)}>
-              Features
-            </a>
-            <a href="#how" onClick={() => setMenuOpen(false)}>
-              How it Works
-            </a>
-            <a href="#mission" onClick={() => setMenuOpen(false)}>
-              Mission
-            </a>
-            <a href="#team" onClick={() => setMenuOpen(false)}>
-              Team
-            </a>
-          </nav>
-        )}
-      </header>
+  <div className="nav-menu" onClick={() => setMenuOpen(!menuOpen)}>
+    ☰
+  </div>
+
+  {/* MOBILE MENU */}
+  {menuOpen && (
+    <div className="mobile-nav">
+      <a href="#features" onClick={() => setMenuOpen(false)}>Features</a>
+      <a href="#how" onClick={() => setMenuOpen(false)}>How it Works</a>
+      <a href="#mission" onClick={() => setMenuOpen(false)}>Mission</a>
+      <a href="#team" onClick={() => setMenuOpen(false)}>Team</a>
+      <a href="#faq" onClick={() => setMenuOpen(false)}>FAQ</a>
+      <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+    </div>
+  )}
+</header>
 
       {/* HERO SECTION */}
       <section className="hero">
@@ -253,31 +258,76 @@ export default function Landing({ onInfluencer, onBrand }) {
 
 
       {/* TEAM */}
-      <section className="team" id="team">
-        <h2>
-          Meet Our <span>Team</span>
-        </h2>
+<section className="team" id="team">
+  <h2 className="team-title">
+    Meet Our <span>Team</span>
+  </h2>
 
-        <div className="team-grid">
-          <div className="team-card">
-            <img src="/avatars/pragnatej.png" alt="" />
-            <h3>Pragnatej Kondala</h3>
-            <p>Founder & CEO</p>
-          </div>
+  <p className="team-sub">
+    The passionate experts behind Stoory, dedicated to building a better
+    influencer ecosystem.
+  </p>
 
-          <div className="team-card">
-            <img src="/avatars/sarath.png" alt="" />
-            <h3>Sarath Meduri</h3>
-            <p>Co-Founder & CTO</p>
-          </div>
+  <div className="team-grid">
+    {/* Pragnatej */}
+    <div className="team-card">
+      <img src="/avatars/pragnatej.png" alt="Pragnatej Kondala" />
 
-          <div className="team-card">
-            <img src="/avatars/kalyan.png" alt="" />
-            <h3>Kalyan Midatha</h3>
-            <p>Co-Founder & MD</p>
-          </div>
-        </div>
-      </section>
+      <h3>Pragnatej Kondala</h3>
+      <p className="role">Founder & CEO</p>
+
+      <p className="desc">
+        A serial entrepreneur with experience in building startups such as
+        Nikospace and Urbantask.
+      </p>
+
+      <div className="socials">
+        <span>in</span>
+        <span>𝕏</span>
+        <span>ig</span>
+      </div>
+    </div>
+
+    {/* Sarath */}
+    <div className="team-card">
+      <img src="/avatars/sarath.png" alt="Sarath Meduri" />
+
+      <h3>Sarath Meduri</h3>
+      <p className="role">Co-Founder & CTO</p>
+
+      <p className="desc">
+        An alumnus of NIT Raipur with technical expertise and experience in
+        building multiple websites.
+      </p>
+
+      <div className="socials">
+        <span>in</span>
+        <span>𝕏</span>
+        <span>ig</span>
+      </div>
+    </div>
+
+    {/* Kalyan */}
+    <div className="team-card">
+      <img src="/avatars/kalyan.png" alt="Kalyan Midatha" />
+
+      <h3>Kalyan Midatha</h3>
+      <p className="role">Co-Founder & MD</p>
+
+      <p className="desc">
+        An alumnus of NIT Bhopal with experience in leading multiple projects
+        such as UrbanTask and OG.
+      </p>
+
+      <div className="socials">
+        <span>in</span>
+        <span>𝕏</span>
+        <span>ig</span>
+      </div>
+    </div>
+  </div>
+</section>
+
     </div>
   );
 }
