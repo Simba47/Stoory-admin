@@ -80,55 +80,55 @@ export default function Admin() {
                 <td>{app.price || "-"}</td>
 
                 {/* ✅ FIXED Contacted checkbox */}
-                <td style={{ textAlign: "center" }}>
-                  <input
-                    type="checkbox"
-                    checked={Boolean(app.contacted)}
-                    onChange={(e) => {
-                      const contacted = e.target.checked;
+                <input
+  type="checkbox"
+  checked={app.contacted}
+  onChange={() => {
+    const updatedApps = apps.map(a =>
+      a.id === app.id
+        ? { ...a, contacted: !a.contacted }
+        : a
+    );
 
-                      // ✅ update ONLY this row
-                      setApps((prev) =>
-                        prev.map((a) =>
-                          a._id === app.id
-                            ? { ...a, contacted }
-                            : a
-                        )
-                      );
+    setApps(updatedApps);
 
-                      // ✅ sync backend
-                      updateApplication(app.id, {
-                        contacted,
-                        notes: app.notes || "",
-                      });
-                    }}
-                  />
-                </td>
+    // 🔁 sync backend (fire & forget)
+    fetch(`${API}/api/applications/${app.id}/contacted`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contacted: !app.contacted,
+      }),
+    });
+  }}
+/>
 
                 {/* 📝 FIXED Notes input */}
                 <td>
-                  <input
-                    style={{ width: "200px" }}
-                    value={app.notes || ""}
-                    placeholder="Add note..."
-                    onChange={(e) => {
-                      const notes = e.target.value;
+                 <input
+  style={{ width: "200px" }}
+  value={app.notes}
+  placeholder="Add note..."
+  onChange={(e) => {
+    const value = e.target.value;
 
-                      setApps((prev) =>
-                        prev.map((a) =>
-                          a._id === app.id
-                            ? { ...a, notes }
-                            : a
-                        )
-                      );
-                    }}
-                    onBlur={() =>
-                      updateApplication(app.id, {
-                        contacted: app.contacted,
-                        notes: app.notes,
-                      })
-                    }
-                  />
+    setApps(prev =>
+      prev.map(a =>
+        a.id === app.id ? { ...a, notes: value } : a
+      )
+    );
+  }}
+  onBlur={() => {
+    fetch(`${API}/api/applications/${app.id}/notes`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        notes: app.notes,
+      }),
+    });
+  }}
+/>
+
                 </td>
               </tr>
             ))}
