@@ -584,23 +584,36 @@ body {
    NAVBAR
 ======================= */
 /* ================= NAVBAR ================= */
+/* =========================
+   NAVBAR
+========================= */
+
 .navbar {
+  width: 100%;
+  background: #fff;
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 24px;
 }
 
 /* LOGO */
-.nav-logo img {
-  height: 34px;
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: #2f6df6;
 }
 
-/* DESKTOP LINKS */
+/* LINKS (DESKTOP) */
 .nav-links {
   display: flex;
   gap: 28px;
@@ -608,56 +621,53 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #666;
-  font-size: 15px;
+  color: #222;
   font-weight: 500;
+  font-size: 16px;
 }
 
 .nav-links a:hover {
-  color: #2f6bff;
+  color: #2f6df6;
 }
 
 /* HAMBURGER */
-.hamburger {
+.menu-btn {
   display: none;
+  background: none;
+  border: none;
   font-size: 28px;
   cursor: pointer;
 }
 
-/* MOBILE MENU */
-.mobile-menu {
-  position: absolute;
-  top: 72px;
-  right: 20px;
-  width: 220px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  display: none;
-  flex-direction: column;
-  padding: 18px;
-  gap: 14px;
-}
+/* =========================
+   MOBILE
+========================= */
 
-.mobile-menu a {
-  text-decoration: none;
-  color: #333;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.mobile-menu.show {
-  display: flex;
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 900px) {
-  .nav-links {
-    display: none;
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
   }
 
-  .hamburger {
-    display: block;
+  .nav-links {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    gap: 0;
+    display: none;
+    border-top: 1px solid #eee;
+  }
+
+  .nav-links a {
+    padding: 14px 20px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 16px;
+  }
+
+  .nav-links.open {
+    display: flex;
   }
 }
 }
