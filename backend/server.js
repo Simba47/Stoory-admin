@@ -7,6 +7,8 @@ const app = express();
 // middleware
 app.use(cors());
 app.use(express.json());
+const adminRoutes = require("./routes/admin");
+app.use("/api/admin", adminRoutes);
 
 // routes
 app.use("/api/applications", require("./routes/applications"));
